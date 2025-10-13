@@ -1,9 +1,13 @@
-export default function App() {
+import { BrowserRouter } from "react-router-dom";
+import { AppLayout } from "./app/layout/AppLayout";
+import { AppRoutes } from "./app/routes/AppRoutes";
+
+export function App() {
   return (
-    <div className="flex h-screen items-center justify-center bg-gray-100">
-      <h1 className="text-4xl font-bold text-blue-600">
-        Numera - Gamified Financial Learning
-      </h1>
-    </div>
+    <BrowserRouter>
+      <AppLayout> 
+        <AppRoutes />
+      </AppLayout>
+    </BrowserRouter>
   );
-}
+};

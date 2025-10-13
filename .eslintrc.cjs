@@ -22,6 +22,7 @@ module.exports = {
     "plugin:prettier/recommended",
   ],
   rules: {
+    "indent": ["error", 2],
     "react/react-in-jsx-scope": "off",
     "prettier/prettier": [
       "error",

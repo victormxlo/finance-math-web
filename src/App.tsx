@@ -1,13 +1,13 @@
 import { BrowserRouter } from "react-router-dom";
-import { AppLayout } from "./app/layout/AppLayout";
+import { Layout } from "./app/layout/Layout";
 import { AppRoutes } from "./app/routes/AppRoutes";
 
 export function App() {
   return (
     <BrowserRouter>
-      <AppLayout> 
+      <Layout> 
         <AppRoutes />
-      </AppLayout>
+      </Layout>
     </BrowserRouter>
   );
 };

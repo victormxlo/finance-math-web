@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
 export function LoginForm() {
@@ -27,12 +28,13 @@ export function LoginForm() {
         onChange={(e) => setPassword(e.target.value)}
         required
       />
-      <button
+      <Button 
         type="submit"
-        className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+        size="lg"
+        className="w-full"
       >
         Entrar
-      </button>
+      </Button>
     </form>
   );
 };

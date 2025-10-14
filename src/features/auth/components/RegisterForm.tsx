@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
 export function RegisterForm() {
@@ -45,12 +46,13 @@ export function RegisterForm() {
         onChange={(e) => setPassword(e.target.value)}
         required
       />
-      <button
+      <Button
         type="submit"
-        className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition"
+        size="lg"
+        className="w-full"
       >
         Cadastrar
-      </button>
+      </Button>
     </form>
   );
 };

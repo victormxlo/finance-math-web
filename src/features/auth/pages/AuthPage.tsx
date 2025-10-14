@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { RegisterForm } from "../components/RegisterForm";
 import { LoginForm } from "../components/LoginForm";
+import { Button } from "@/components/ui/button";
 
 export function AuthPage() {
   const [mode, setMode] = useState<"login" | "register">("login");
@@ -18,22 +19,16 @@ export function AuthPage() {
           {mode === "login" ? (
             <p>
               Não tem conta?{" "}
-              <button
-                onClick={() => setMode("register")}
-                className="text-blue-600 hover:underline"
-              >
+              <Button size="sm" variant="link" onClick={() => setMode("register")}>
                 Cadastre-se
-              </button>
+              </Button>
             </p>
           ) : (
             <p>
               Já tem conta?{" "}
-              <button
-                onClick={() => setMode("login")}
-                className="text-blue-600 hover:underline"
-              >
+              <Button size="sm" variant="link" onClick={() => setMode("login")}>
                 Entrar
-              </button>
+              </Button>
             </p>
           )}
         </div>

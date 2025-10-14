@@ -1,13 +1,37 @@
+import { useAuth } from "@/app/providers/auth/useAuth";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { AuthService } from "../api/authApi";
+import { useNavigate } from "react-router-dom";
 
 export function LoginForm() {
+  const { login, isAuthenticated } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const navigate = useNavigate();
+
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    // Handle login logic here
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await AuthService.login({ email, password });
+      login(response);
+
+      if (isAuthenticated) {
+        navigate("/");
+        console.log("authenticated");
+      }
+    } catch (err: any) {
+      console.error(err);
+      setError(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

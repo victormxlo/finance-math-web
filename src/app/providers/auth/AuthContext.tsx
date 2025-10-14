@@ -1,7 +1,6 @@
 import { createContext, useState, useEffect, type ReactNode, useCallback  } from "react";
-import type { AuthContextType, AuthUser } from "./AuthTypes";
+import type { AuthContextType, AuthResponse, User } from "./AuthTypes";
 import { authStorage } from "./authStorage";
-import api from "@/lib/api/axiosInstance";
 
 export const AuthContext = 
   createContext<AuthContextType | undefined>(undefined);
@@ -11,61 +10,19 @@ interface AuthProviderProps {
 };
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  const [user, setUser] = useState<AuthUser | null>(() => {
-    try {
-      const raw = authStorage.getUser();
-      return raw ? (JSON.parse(raw) as AuthUser) : null;
-    } catch {
-      return null;
-    }
-  });
+  const [user, setUser] = useState<User | null>(null);
+  const [token, setToken] = useState<string | null>(null);
 
-  const [token, setToken] = useState<string | null>(() => {
-    try {
-      return authStorage.getToken();
-    } catch {
-      return null;
-    }
-  });
+  const login = (data: AuthResponse) => {
+    const user: User = data;
+    const token = data.token!;
 
-  const register = async (fullName: string, username: string, email: string, password: string) => {
-    // API call
-    const fakeUser: AuthUser = {
-      id: "1",
-      username: username,
-      email,
-      role: "User",
-      token: "fake-token"
-    };
+    setUser(user);
+    setToken(token);
 
-    setUser(fakeUser);
-    setToken(fakeUser.token || null);
-
-    authStorage.setUser(JSON.stringify(fakeUser));
-    authStorage.setToken(fakeUser.token || "");
+    authStorage.setUser(user);
+    authStorage.setToken(token);
   };
-
-  const login = async (email: string, password: string) => {
-    // API call
-    const fakeUser: AuthUser = {
-      id: "1",
-      username: "John Doe",
-      email,
-      role: "User",
-      token: "fake-token"
-    };
-
-    setUser(fakeUser);
-    setToken(fakeUser.token || null);
-
-    authStorage.setUser(JSON.stringify(fakeUser));
-    authStorage.setToken(fakeUser.token || "");
-  };
-
-  const setAuth = useCallback((nextUser: AuthUser | null, nextToken: string | null = null) => {
-    setUser(nextUser);
-    setToken(nextToken);
-  }, []);
 
   const logout = useCallback(() => {
     setUser(null);
@@ -76,39 +33,19 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, []);
 
   useEffect(() => {
-    if (user) {
-      try {
-        authStorage.setUser(JSON.stringify(user));
-      } catch {}
-    } else {
-      authStorage.removeUser();
-    }
-  }, [user]);
+    const storedToken = authStorage.getToken();
+    const storedUser = authStorage.getUser();
 
-  useEffect(() => {
-    if (token) {
-      try {
-        authStorage.setToken(token);
-      } catch {}
-      try {
-        api.defaults.headers.common = api.defaults.headers.common || {};
-        api.defaults.headers.common.Authorization = `Bearer ${token}`;
-      } catch {}
-    } else {
-      authStorage.removeToken();
-      try {
-        if (api.defaults.headers?.common) {
-          delete api.defaults.headers.common.Authorization;
-        }
-      } catch {}
+    if (storedToken && storedUser){
+      setToken(storedToken);
+      setUser(JSON.parse(storedUser));
     }
-  }, [token]);
+  }, []);
 
   const value: AuthContextType = {
     user,
-    isAuthenticated: !!user,
-    setAuth,
-    register,
+    token,
+    isAuthenticated: Boolean(token && user),
     login,
     logout
   };

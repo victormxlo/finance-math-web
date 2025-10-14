@@ -9,9 +9,10 @@ export const authStorage = {
       return null;
     }
   },
-  setUser(value: string) {
+  setUser(value: any) {
     try {
-      localStorage.setItem(STORAGE_KEYS.USER, value);
+      const jsonValue = typeof value === "string" ? value : JSON.stringify(value);
+      localStorage.setItem(STORAGE_KEYS.USER, jsonValue);
     } catch {}
   },
   removeUser() {

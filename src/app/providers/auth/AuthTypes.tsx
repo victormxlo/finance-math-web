@@ -1,19 +1,33 @@
-import type { UserType } from "@/types/user";
-
-export interface AuthUser {
+export interface User {
   id: string;
   username: string;
+  fullName: string;
   email: string;
-  role: UserType;
+  type: "Admin" | "Student";
+  createdAt: string;
   token?: string;
 };
 
+export interface RegisterPayload {
+  username: string;
+  fullName: string;
+  email: string;
+  password: string;
+  type: number;
+};
+
+export interface LoginPayload {
+  email: string;
+  password: string;
+};
+
+export interface AuthResponse extends User { }
+
 export interface AuthContextType {
-  user: AuthUser | null;
+  user: User | null;
+  token: string | null;
   isAuthenticated: boolean;
-  setAuth: (nextUser: AuthUser | null, nextToken?: string | null) => void;
-  register: (fullName: string, username: string, email: string, password: string) => Promise<void>;
-  login: (email: string, password: string) => Promise<void>;
+  login: (auth: AuthResponse) => void;
   logout: () => void;
 };
 

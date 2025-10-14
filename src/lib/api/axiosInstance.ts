@@ -2,8 +2,10 @@ import axios from "axios";
 import { STORAGE_KEYS } from "../constants/storageKeys";
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL ?? "",
-  timeout: 10000
+  baseURL: import.meta.env.VITE_API_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 
 api.interceptors.request.use((config) => {
@@ -25,7 +27,7 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error?.response?.status === 401) {
-      // Handle unauthorized access, e.g., redirect to login page
+      // TBU Handle unauthorized access, e.g., redirect to login page
       console.warn("Unauthorized access - perhaps redirect to login?");
     }
     return Promise.reject(error);

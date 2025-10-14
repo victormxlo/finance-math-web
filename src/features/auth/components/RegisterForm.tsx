@@ -1,15 +1,41 @@
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { AuthService } from "../api/authApi";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/app/providers/auth/useAuth";
 
 export function RegisterForm() {
+  const { login, isAuthenticated } = useAuth();
   const [username, setUsername] = useState("");
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const navigate = useNavigate();
+
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    // Handle registration logic here
+    setLoading(true);
+    setError(null);
+
+    try {
+      const type = 0;
+      const response = await AuthService
+        .register({ username, fullName, email, password, type });
+      login(response);
+
+      if (isAuthenticated) {
+        navigate("/");
+        console.log("authenticated");
+      }
+    } catch (err: any) {
+      setError(err);
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

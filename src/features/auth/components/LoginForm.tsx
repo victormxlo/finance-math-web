@@ -1,15 +1,15 @@
 import { useAuth } from "@/app/providers/auth/useAuth";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { AuthService } from "../api/authApi";
 import { useNavigate } from "react-router-dom";
+import { AuthService } from "../services/authService";
 
 export function LoginForm() {
   const { login, isAuthenticated } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<any | null>(null);
 
   const navigate = useNavigate();
 
@@ -22,13 +22,10 @@ export function LoginForm() {
       const response = await AuthService.login({ email, password });
       login(response);
 
-      if (isAuthenticated) {
-        console.log(isAuthenticated);
-        navigate("/");
-      }
+      navigate("/");
     } catch (err: any) {
       console.error(err);
-      setError(err);
+      setError(err?.message);
     } finally {
       setLoading(false);
     }

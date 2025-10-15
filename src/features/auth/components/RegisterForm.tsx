@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { AuthService } from "../api/authApi";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/app/providers/auth/useAuth";
+import { AuthService } from "../services/authService";
 
 export function RegisterForm() {
   const { login, isAuthenticated } = useAuth();
@@ -27,8 +27,8 @@ export function RegisterForm() {
 
       navigate("/");
     } catch (err: any) {
-      setError(err);
       console.error(err);
+      setError(err?.message);
     } finally {
       setLoading(false);
     }

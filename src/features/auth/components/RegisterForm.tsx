@@ -22,14 +22,10 @@ export function RegisterForm() {
 
     try {
       const type = 0;
-      const response = await AuthService
-        .register({ username, fullName, email, password, type });
+      const response = await AuthService.register({ username, fullName, email, password, type });
       login(response);
 
-      if (isAuthenticated) {
-        navigate("/");
-        console.log("authenticated");
-      }
+      navigate("/");
     } catch (err: any) {
       setError(err);
       console.error(err);
@@ -72,12 +68,13 @@ export function RegisterForm() {
         onChange={(e) => setPassword(e.target.value)}
         required
       />
+      {error && <p className="text-red-500 text-sm">{error}</p>}
       <Button
         type="submit"
         size="lg"
         className="w-full"
       >
-        Cadastrar
+        {loading ? "Cadastrando" : "Cadastrar"}
       </Button>
     </form>
   );

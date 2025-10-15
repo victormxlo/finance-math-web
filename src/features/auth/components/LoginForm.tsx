@@ -23,8 +23,8 @@ export function LoginForm() {
       login(response);
 
       if (isAuthenticated) {
+        console.log(isAuthenticated);
         navigate("/");
-        console.log("authenticated");
       }
     } catch (err: any) {
       console.error(err);
@@ -52,12 +52,13 @@ export function LoginForm() {
         onChange={(e) => setPassword(e.target.value)}
         required
       />
+      {error && <p className="text-red-500 text-sm">{error}</p>}
       <Button 
         type="submit"
         size="lg"
         className="w-full"
       >
-        Entrar
+        {loading ? "Entrando" : "Entrar"}
       </Button>
     </form>
   );

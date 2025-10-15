@@ -1,11 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { AUTH_MODES, type AuthMode } from "@/features/auth/constants/authMode";
 
 export function HeroSection() {
   const navigate = useNavigate();
 
-  const goToAuth = () =>
-    navigate("/auth");
+  const goToAuth = (mode: AuthMode) =>
+    navigate(`/auth?mode=${mode}`);
 
   return (
     <section className="flex flex-col items-center text-center py-24 bg-gradient-to-b from-background to-muted">
@@ -16,10 +17,10 @@ export function HeroSection() {
         Domine conceitos financeiros com exercícios interativos, conquistas e estatísticas personalizadas.
       </p>
       <div className="flex gap-4">
-        <Button size="lg" onClick={() => goToAuth()}>
+        <Button size="lg" onClick={() => goToAuth(AUTH_MODES.REGISTER)}>
           Começar Agora
         </Button>
-        <Button size="lg" variant="outline" onClick={() => goToAuth()}>
+        <Button size="lg" variant="outline" onClick={() => goToAuth(AUTH_MODES.LOGIN)}>
           Entrar
         </Button>
       </div>

@@ -1,16 +1,13 @@
-import { CTASection } from "@/components/landing/CTASection";
-import { FeaturesSection } from "@/components/landing/FeaturesSection";
-import { HeroSection } from "@/components/landing/HeroSection";
-import { Navbar } from "@/components/navigation/Navbar";
+import { CTASection } from "@/features/home/components/CTASection";
+import { FeaturesSection } from "@/features/home/components/FeaturesSection";
+import { HeroSection } from "@/features/home/components/HeroSection";
 
 export function LandingPage() {
   return (
     <>
-      <Navbar />
       <HeroSection />
       <FeaturesSection />
       <CTASection />
-      // TBA footer
     </>
   );
 };

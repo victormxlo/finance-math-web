@@ -3,6 +3,7 @@ import { Navbar } from "../../components/navigation/Navbar";
 import { Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "../providers/auth/useAuth";
 import { publicRoutes } from "../routes/publicRoutes";
+import { Footer } from "@/components/layout/Footer";
 
 interface LayoutProps {
   children: ReactNode;
@@ -21,6 +22,7 @@ export function Layout({children} : LayoutProps) {
         {children}
         <Outlet />
       </main>
+      {isPublicRoute && !user && <Footer />}
 		</div>
   )
 };

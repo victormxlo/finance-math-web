@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import { AUTH_MODES, type AuthMode } from "@/features/auth/constants/authMode";
 
 export function HeroSection() {

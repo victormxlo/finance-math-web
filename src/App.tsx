@@ -1,15 +1,15 @@
 import { BrowserRouter } from "react-router-dom";
-import { Layout } from "./app/layout/Layout";
-import { AppRoutes } from "./app/routes/AppRoutes";
+import { AppLayoutResolver } from "@/app/layout/AppLayoutResolver";
+import { AppRoutes } from "@/app/routes/AppRoutes";
 import { Toaster } from "sonner";
 
 export function App() {
   return (
     <BrowserRouter>
       <Toaster />
-      <Layout> 
+      <AppLayoutResolver> 
         <AppRoutes />
-      </Layout>
+      </AppLayoutResolver>
     </BrowserRouter>
   );
 };

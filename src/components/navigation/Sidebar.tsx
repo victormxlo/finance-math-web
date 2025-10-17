@@ -17,7 +17,7 @@ export function Sidebar() {
     )}
     >
       <div className="p-4 flex items-center justify-between">
-        {!collapsed && <h1 className="text-xl font-bold">Numera</h1>}
+        {!collapsed && <h1 className="text-xl font-bold">Menu</h1>}
         <Button variant="ghost" size="sm" onClick={() => setCollapsed(!collapsed)}>
           {collapsed ? "»" : "«"}
         </Button>
@@ -43,14 +43,14 @@ export function Sidebar() {
 
       <div className="p-4 border-t border-gray-200 dark:border-neutral-800">
         {!collapsed && (
-          <div className="mb-2 text-sm text-gray-600 dark:text-gray-400">
+          <div className="mb-2 text-sm text-gray-600 dark:text-gray-400 font-bold">
             {user?.username || "User"}
           </div>
         )}
         <Button
           variant="destructive"
           size="sm"
-          className="w=full"
+          className="w-full flex items-center justify-center cursor-pointer"
           onClick={logout}
         >
           <LogOut size={16} />

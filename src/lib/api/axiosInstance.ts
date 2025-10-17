@@ -29,7 +29,6 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error?.response?.status === 401) {
-      console.warn("Unauthorized access.");
       toast.error("Session expired. Log in again.");
 
       authStorage.removeUser();
@@ -37,6 +36,16 @@ api.interceptors.response.use(
 
       window.location.href = "/auth";
     }
+    else if (error?.response?.status === 403) {
+      toast.error("You do not have permission to access this resource.");
+    }
+    else if (error?.response?.status === 500) {
+      toast.error("Internal server error. Please try again later.");
+    }
+    else {
+      toast.error(error?.response?.data?.message);
+    }
+
     return Promise.reject(error);
   }
 );

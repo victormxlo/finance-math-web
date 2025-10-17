@@ -2,11 +2,18 @@ import { useState } from "react";
 import { RegisterForm } from "../components/RegisterForm";
 import { LoginForm } from "../components/LoginForm";
 import { Button } from "@/components/ui/Button";
-import { useSearchParams } from "react-router-dom";
+import { Navigate, useSearchParams } from "react-router-dom";
 import { AUTH_MODES, type AuthMode } from "@/features/auth/constants/authMode";
+import { useAuth } from "@/app/providers/auth/useAuth";
 
 export function AuthPage() {
+  const { user } = useAuth();
   const [searchParams, setSearchParams] = useSearchParams();
+
+  if (user) {
+    return <Navigate to="/" replace />;
+  };
+
   const initialMode = searchParams.get("mode") === AUTH_MODES.LOGIN ? 
     AUTH_MODES.LOGIN : AUTH_MODES.REGISTER;
 

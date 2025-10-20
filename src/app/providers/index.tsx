@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { AuthProvider } from "./auth/AuthContext";
+import { AuthProvider } from "../../features/auth/context/AuthContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "sonner";
 

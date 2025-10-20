@@ -1,6 +1,7 @@
-import type { LoginPayload, RegisterPayload } from "@/app/providers/auth/AuthTypes";
-import { loginApi, registerApi } from "../api/authApi";
+import { loginApi, registerApi } from "@/features/auth/api/authApi";
 import { mapApiError } from "@/lib/api/apiErrorMapper";
+import type { LoginPayload } from "@/features/auth/dtos/loginPayload";
+import type { RegisterPayload } from "@/features/auth/dtos/registerPayload";
 
 export const AuthService = {
   async login(payload: LoginPayload) {

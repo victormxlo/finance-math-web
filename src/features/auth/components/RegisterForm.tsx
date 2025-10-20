@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/Button";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "@/app/providers/auth/useAuth";
+import { useAuth } from "@/features/auth/context/useAuth";
 import { AuthService } from "../services/authService";
 
 export function RegisterForm() {

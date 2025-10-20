@@ -4,7 +4,7 @@ import { LoginForm } from "../components/LoginForm";
 import { Button } from "@/components/ui/Button";
 import { Navigate, useSearchParams } from "react-router-dom";
 import { AUTH_MODES, type AuthMode } from "@/features/auth/constants/authMode";
-import { useAuth } from "@/app/providers/auth/useAuth";
+import { useAuth } from "@/features/auth/context/useAuth";
 
 export function AuthPage() {
   const { user } = useAuth();

@@ -1,4 +1,4 @@
-import { useAuth } from "@/app/providers/auth/useAuth";
+import { useAuth } from "@/features/auth/context/useAuth";
 import { DashboardPage } from "@/features/dashboard/pages/DashboardPage";
 import { LandingPage } from "./LandingPage";
 

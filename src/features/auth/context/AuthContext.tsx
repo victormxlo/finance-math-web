@@ -1,6 +1,8 @@
 import { createContext, useState, useEffect, type ReactNode, useCallback  } from "react";
-import type { AuthContextType, AuthResponse, User } from "./AuthTypes";
-import { authStorage } from "./authStorage";
+import type { AuthContextType } from "./authContextType";
+import { authStorage } from "@/features/auth/storage/authStorage";
+import type { AuthResponse } from "@/features/auth/dtos/authResponse";
+import type { User } from "@/features/auth/dtos/user";
 
 export const AuthContext = 
   createContext<AuthContextType | undefined>(undefined);

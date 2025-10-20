@@ -1,5 +1,7 @@
-import type { AuthResponse, LoginPayload, RegisterPayload } from "@/app/providers/auth/AuthTypes";
 import api from "@/lib/api/axiosInstance";
+import type { LoginPayload } from "@/features/auth/dtos/loginPayload";
+import type { RegisterPayload } from "@/features/auth/dtos/registerPayload";
+import type { AuthResponse } from "@/features/auth/dtos/authResponse";
 
 export async function loginApi(payload: LoginPayload): Promise<AuthResponse> {
   const response = await api.post("/Auth/login", payload);

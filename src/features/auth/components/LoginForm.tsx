@@ -1,8 +1,8 @@
-import { useAuth } from "@/app/providers/auth/useAuth";
+import { useAuth } from "@/features/auth/context/useAuth";
 import { Button } from "@/components/ui/Button";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthService } from "../services/authService";
+import { AuthService } from "@/features/auth/services/authService";
 
 export function LoginForm() {
   const { login, isAuthenticated } = useAuth();

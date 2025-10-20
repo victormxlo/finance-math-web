@@ -1,6 +1,6 @@
 import axios from "axios";
 import { STORAGE_KEYS } from "../constants/storageKeys";
-import { authStorage } from "@/app/providers/auth/authStorage";
+import { authStorage } from "@/features/auth/storage/authStorage";
 import { toast } from "sonner";
 
 const api = axios.create({

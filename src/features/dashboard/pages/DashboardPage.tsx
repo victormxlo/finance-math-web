@@ -1,3 +1,4 @@
+import { NextContents } from "../components/NextContents";
 import { QuickStats } from "../components/QuickStats";
 import { WelcomeBanner } from "../components/WelcomeBanner";
 
@@ -12,9 +13,8 @@ export function DashboardPage() {
         </div>
       </div>
 
-      <div className="bg-muted rounded-lg p-4 min-h-[150px] flex items-center justify-center text-muted-foreground">
-        Next Contents
-      </div>
+      <NextContents limit={3} />
+
       <div className="bg-muted rounded-lg p-4 min-h-[150px] flex items-center justify-center text-muted-foreground">
         Activity Timeline
       </div>

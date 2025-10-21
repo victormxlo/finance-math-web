@@ -1,3 +1,4 @@
+import { AchievementsHighlight } from "../components/AchievementsHighlight";
 import { NextContents } from "../components/NextContents";
 import { QuickStats } from "../components/QuickStats";
 import { WelcomeBanner } from "../components/WelcomeBanner";
@@ -18,9 +19,8 @@ export function DashboardPage() {
       <div className="bg-muted rounded-lg p-4 min-h-[150px] flex items-center justify-center text-muted-foreground">
         Activity Timeline
       </div>
-      <div className="bg-muted rounded-lg p-4 min-h-[150px] flex items-center justify-center text-muted-foreground">
-        Achievements
-      </div>
+
+      <AchievementsHighlight limit={8} />
     </div>
   );
 };

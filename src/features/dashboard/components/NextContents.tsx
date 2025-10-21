@@ -1,11 +1,11 @@
-import type { Content } from "@/features/content/dtos/content";
+import type { ContentDTO } from "@/features/content/dtos/contentDto";
 import type { FC } from "react";
 import { mockContents } from "../mocks/mockContents";
 import { Link } from "react-router-dom";
 import { ContentCard } from "./ContentCard";
 
 interface NextContentsProps {
-  contents?: Content[];
+  contents?: ContentDTO[];
   loading?: boolean;
   limit?: number;
 };
@@ -35,7 +35,7 @@ export const NextContents: FC<NextContentsProps> = ({ contents, loading = false,
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {list.slice(0, limit).map((c: Content) => (
+        {list.slice(0, limit).map((c: ContentDTO) => (
           <ContentCard key={c.id} content={c} />
         ))}
       </div>

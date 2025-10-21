@@ -1,3 +1,3 @@
-import type { User } from "@/features/auth/dtos/user";
+import type { UserDTO } from "@/features/auth/dtos/userDto";
 
-export interface AuthResponse extends User { }
+export interface AuthResponse extends UserDTO { }

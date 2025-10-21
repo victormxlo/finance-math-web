@@ -2,7 +2,7 @@ import { createContext, useState, useEffect, type ReactNode, useCallback  } from
 import type { AuthContextType } from "./authContextType";
 import { authStorage } from "@/features/auth/storage/authStorage";
 import type { AuthResponse } from "@/features/auth/dtos/authResponse";
-import type { User } from "@/features/auth/dtos/user";
+import type { UserDTO } from "@/features/auth/dtos/userDto";
 
 export const AuthContext = 
   createContext<AuthContextType | undefined>(undefined);
@@ -12,11 +12,11 @@ interface AuthProviderProps {
 };
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<UserDTO | null>(null);
   const [token, setToken] = useState<string | null>(null);
 
   const login = (data: AuthResponse) => {
-    const user: User = data;
+    const user: UserDTO = data;
     const token = data.token!;
 
     setUser(user);

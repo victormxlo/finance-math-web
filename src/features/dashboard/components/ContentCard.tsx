@@ -1,9 +1,9 @@
-import type { Content } from "@/features/content/dtos/content";
+import type { ContentDTO } from "@/features/content/dtos/contentDto";
 import { BookOpen, Clock } from "lucide-react";
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
 
-export function ContentCard({ content }: { content: Content }) {
+export function ContentCard({ content }: { content: ContentDTO }) {
   const isNew = useMemo(() => {
     const created = new Date(content.createdAt);
     const diffDays = (Date.now() - created.getTime()) / (1000 * 60 * 60 * 24);

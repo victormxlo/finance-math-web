@@ -1,8 +1,8 @@
-import type { User } from "@/features/auth/dtos/user";
+import type { UserDTO } from "@/features/auth/dtos/userDto";
 import type { AuthResponse } from "@/features/auth/dtos/authResponse";
 
 export interface AuthContextType {
-  user: User | null;
+  user: UserDTO | null;
   token: string | null;
   isAuthenticated: boolean;
   login: (auth: AuthResponse) => void;

@@ -1,6 +1,6 @@
-import type { Content } from "@/features/content/dtos/content";
+import type { ContentDTO } from "@/features/content/dtos/contentDto";
 
-export const mockContents: Content[] = [
+export const mockContents: ContentDTO[] = [
   {
     id: "11111111-1111-1111-1111-111111111111",
     title: "Introdução a Juros Simples",

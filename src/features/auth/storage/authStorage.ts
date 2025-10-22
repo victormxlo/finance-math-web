@@ -1,6 +1,5 @@
 import { STORAGE_KEYS } from "@/lib/constants/storageKeys";
 
-
 export const authStorage = {
   getUser(): string | null {
     try {

@@ -12,7 +12,7 @@ export function Sidebar() {
 
   return (
     <aside className={clsx(
-      "h-screen bg-white border-r border-gray-200 dark:bg-neutral-900 dark:border-neutral-800 flex flex-col transition-all duration-300",
+      "min-h-screen flex flex-col justify-between bg-white border-r border-gray-200 dark:bg-neutral-900 dark:border-neutral-800 flex flex-col transition-all duration-300",
       collapsed ? "w-15" : "w-64"
     )}
     >

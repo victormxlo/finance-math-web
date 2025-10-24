@@ -16,6 +16,7 @@ export function mapExerciseProgress(data: any[]): ActivityEvent[] {
     type: ACTIVITY_EVENT_TYPES.EXERCISE,
     id: item.exerciseId,
     title: item.exerciseQuestion,
+    completedAt: item.completedAt
   }));
 };
 

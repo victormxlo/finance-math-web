@@ -1,4 +1,4 @@
-import type { AchievementDTO } from "@/features/challenge/dtos/achievementDto";
+import type { AchievementDTO } from "@/features/achievement/dtos/achievementDto";
 import { Coins, Gift, Star } from "lucide-react";
 
 export function AchievementCard({ achievement }: { achievement: AchievementDTO } ) {

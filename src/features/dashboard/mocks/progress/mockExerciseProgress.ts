@@ -7,6 +7,7 @@ export const mockExerciseProgress = [
     exerciseId: uuid(),
     exerciseQuestion: 'Qual é o montante de um investimento de R$1.000,00 a 10% ao ano por 2 anos?',
     categoryId: uuid(),
+    completedAt: new Date('2025-10-10T14:30:00'),
   },
   {
     profileId: uuid(),
@@ -14,5 +15,6 @@ export const mockExerciseProgress = [
     exerciseId: uuid(),
     exerciseQuestion: 'Calcule os juros simples de um empréstimo de R$500,00 por 3 meses a 2% ao mês.',
     categoryId: uuid(),
+    completedAt: new Date('2025-10-12T09:15:00'),
   },
 ];

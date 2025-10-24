@@ -1,4 +1,4 @@
-import type { AchievementDTO } from "@/features/challenge/dtos/achievementDto";
+import type { AchievementDTO } from "@/features/achievement/dtos/achievementDto";
 
 export const mockAchievements: AchievementDTO[] = [
   {

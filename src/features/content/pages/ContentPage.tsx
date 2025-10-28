@@ -1,6 +1,7 @@
 import { useContents } from "../hooks/useContents";
 import { CategoryList } from "../components/CategoryList";
 import { SubcategoryList } from "../components/SubcategoryList";
+import { ContentList } from "../components/ContentList";
 
 export function ContentPage() {
   const {
@@ -28,7 +29,10 @@ export function ContentPage() {
       )}
 
       {selectedSubcategory && (
-        <div>ContentList</div>
+        <ContentList 
+          contents={contents}
+          onBack={() => setSelectedSubcategory(null)}
+        />
       )}
     </div>
   )

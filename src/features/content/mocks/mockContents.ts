@@ -1,4 +1,4 @@
-import type { ContentDTO } from "../dtos/contentDto";
+import type { ContentDTO } from "@/features/content/dtos/contentDto";
 
 export const mockContents: ContentDTO[] = [
   {

@@ -1,5 +1,6 @@
 import { ContentCard } from "@/features/content/components/ContentCard";
 import type { ContentDTO } from "@/features/content/dtos/contentDto";
+import { useNavigate } from "react-router-dom";
 
 interface ContentListProps {
   contents: ContentDTO[];
@@ -9,6 +10,8 @@ interface ContentListProps {
 }
 
 export const ContentList: React.FC<ContentListProps> = ({ contents, completedIds, onBack, onOpen }) => {
+  const navigate = useNavigate();
+  
   return (
     <div className="space-y-4">
       {onBack && (
@@ -26,7 +29,7 @@ export const ContentList: React.FC<ContentListProps> = ({ contents, completedIds
             key={content.id}
             content={content}
             completed={completedIds?.has(content.id)}
-            onOpen={onOpen}
+            onOpen={() => navigate(`/contents/${content.id}`)}
           />
         ))}
       </div>

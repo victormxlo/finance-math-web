@@ -8,6 +8,7 @@ import { Route, Routes } from "react-router-dom";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { ChallengePage } from "@/features/challenge/pages/ChallengePage";
 import { AchievementPage } from "@/features/achievement/pages/AchievementPage";
+import { ContentDetailPage } from "@/features/content/pages/ContentDetailPage";
 
 export function AppRoutes() {
   return (
@@ -16,6 +17,7 @@ export function AppRoutes() {
       <Route path="/auth" element={<AuthPage />} />
       <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
       <Route path="/contents" element={<ProtectedRoute><ContentPage /></ProtectedRoute>} />
+      <Route path="/contents/:id" element={<ProtectedRoute><ContentDetailPage /></ProtectedRoute>} />
       <Route path="/achievements" element={<ProtectedRoute><AchievementPage /></ProtectedRoute>} />
       <Route path="/exercises" element={<ProtectedRoute><ExercisePage /></ProtectedRoute>} />
       <Route path="/challenges" element={<ProtectedRoute><ChallengePage /></ProtectedRoute>} />

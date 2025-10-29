@@ -2,18 +2,20 @@ import { useContents } from "../hooks/useContents";
 import { CategoryList } from "../components/CategoryList";
 import { SubcategoryList } from "../components/SubcategoryList";
 import { ContentList } from "../components/ContentList";
+import { useCategories } from "../hooks/useCategories";
 
 export function ContentPage() {
   const {
     categories,
     subcategories,
-    contents,
     selectedCategory,
     selectedSubcategory,
     setSelectedCategory,
-    setSelectedSubcategory
-  } = useContents();
-  
+    setSelectedSubcategory,
+  } = useCategories();
+
+  const { contents } = useContents(selectedCategory, selectedSubcategory);
+
   return (
     <div className="p-6 space-y-8">
       {!selectedCategory && (
@@ -29,11 +31,11 @@ export function ContentPage() {
       )}
 
       {selectedSubcategory && (
-        <ContentList 
+        <ContentList
           contents={contents}
           onBack={() => setSelectedSubcategory(null)}
         />
       )}
     </div>
-  )
-};
+  );
+}

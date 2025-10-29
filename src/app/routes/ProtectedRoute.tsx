@@ -7,7 +7,12 @@ interface ProtectedRouteProps {
 };
 
 export function ProtectedRoute({ children }: ProtectedRouteProps) {
-  const { user } = useAuth();
+  const { user, isLoading } = useAuth();
+
+  if (isLoading) {
+    // TBI: Create spinner
+    return null;
+  }
 
   if (!user)
     return <Navigate to="/auth" replace />;

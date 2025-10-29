@@ -14,6 +14,7 @@ interface AuthProviderProps {
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<UserDTO | null>(null);
   const [token, setToken] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const login = (data: AuthResponse) => {
     const user: UserDTO = data;
@@ -42,12 +43,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
       setToken(storedToken);
       setUser(JSON.parse(storedUser));
     }
+
+    setIsLoading(false);
   }, []);
 
   const value: AuthContextType = {
     user,
     token,
     isAuthenticated: Boolean(token && user),
+    isLoading,
     login,
     logout
   };

@@ -1,4 +1,4 @@
-import { useAuth } from "@/features/auth/context/useAuth";
+import { useAuth } from "@/features/auth/hooks/useAuth";
 import type { FC } from "react";
 import { useActivityTimeline } from "@/features/dashboard/hooks/useActivityTimeline";
 import { AnimatePresence, motion } from "framer-motion";

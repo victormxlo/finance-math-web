@@ -1,4 +1,4 @@
-import { useAuth } from "@/features/auth/context/useAuth";
+import { useAuth } from "@/features/auth/hooks/useAuth";
 import { motion } from "framer-motion";
 
 export function WelcomeBanner() {

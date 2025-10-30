@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { ContentHeader } from "../components/ContentHeader";
-import { useAuth } from "@/features/auth/context/useAuth";
+import { useAuth } from "@/features/auth/hooks/useAuth";
 import { useContentDetail } from "@/features/content/hooks/useContentDetail";
 import { MediaHero } from "../components/MediaHero";
 import { TableOfContents } from "../components/TableOfContents";

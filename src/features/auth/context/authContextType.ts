@@ -9,4 +9,3 @@ export interface AuthContextType {
   login: (auth: AuthResponse) => void;
   logout: () => void;
 };
-

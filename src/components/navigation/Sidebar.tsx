@@ -1,4 +1,4 @@
-import { useAuth } from "@/features/auth/context/useAuth";
+import { useAuth } from "@/features/auth/hooks/useAuth";
 import clsx from "clsx";
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";

@@ -1,4 +1,4 @@
-import { useAuth } from "@/features/auth/context/useAuth";
+import { useAuth } from "@/features/auth/hooks/useAuth";
 import { Button } from "@/components/ui/Button";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";

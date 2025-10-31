@@ -1,13 +1,15 @@
 import type { FC } from "react";
 import type { ContentDTO } from "@/features/content/dtos/contentDto";
+import { useNavigate } from "react-router-dom";
 
 interface ContentCardProps {
   content: ContentDTO;
   completed?: boolean;
-  onOpen?: (id: string) => void;
 };
 
-export const ContentCard: FC<ContentCardProps> = ({ content, completed = false, onOpen }) => {
+export const ContentCard: FC<ContentCardProps> = ({ content, completed = false }) => {
+  const navigate = useNavigate();
+
   return (
     <div className="border rounded-xl p-4 shadow-sm hover:shadow-md transition flex flex-col justify-between h-full">
       <div>
@@ -19,8 +21,8 @@ export const ContentCard: FC<ContentCardProps> = ({ content, completed = false, 
           {completed ? "✔ Completed" : "⏳ Not started"}
         </span>
         <button
-          className="px-3 py-1 rounded-md bg-blue-600 text-white text-sm hover:brightness-95 transition"
-          onClick={() => onOpen}
+          className="px-3 py-1 rounded-md bg-blue-600 text-white text-sm hover:brightness-95 transition cursor-pointer"
+          onClick={() => navigate(`/contents/${content.id}`)}
         >
           Open
         </button>

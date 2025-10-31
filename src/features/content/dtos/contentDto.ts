@@ -5,7 +5,7 @@ export interface ContentDTO {
   mediaUrl?: string | null;
   categoryId: string;
   createdBy: string;
-  createdAt: string; // ISO
+  createdAt: string;
   updatedAt?: string | null;
   exerciseIds: string[];
   sectionIds: string[];

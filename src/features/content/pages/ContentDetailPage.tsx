@@ -6,10 +6,11 @@ import { MediaHero } from "../components/MediaHero";
 import { TableOfContents } from "../components/TableOfContents";
 import { SectionBlock } from "../components/SectionBlock";
 import { FooterActions } from "../components/FooterActions";
+import { FEEDBACK_TYPES } from "@/features/feedback/constants/feedbackTypes";
+import { useFeedbackModal } from "@/features/feedback/hooks/useFeedbackModal";
 
 export const ContentDetailPage = () => {
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
   const { user } = useAuth();
   const userId = user?.id;
 
@@ -20,6 +21,8 @@ export const ContentDetailPage = () => {
     setActiveIndex,
     loading,
     error,
+    contentProgress,
+    isContentCompleted,
     markSectionComplete,
     markSectionIncomplete,
     completedSectionIdsSet,
@@ -30,6 +33,8 @@ export const ContentDetailPage = () => {
     completing,
     completeResult,
   } = useContentDetail(id, userId);
+
+  const { openFeedback } = useFeedbackModal();
 
   if (loading) {
     return (
@@ -72,13 +77,18 @@ export const ContentDetailPage = () => {
             createdAt={content.createdAt}
             sectionsCount={sections.length}
             onComplete={async () => {
+              if (isContentCompleted) return;
+
               try {
-                await completeContent();
-                // TBI: Create completion UX
-              } catch {}
+                const result = await completeContent();
+                if (result) openFeedback(FEEDBACK_TYPES.CONTENT, result);
+              } catch (error) {
+                console.error(error);
+              }
             }}
             completing={completing}
             allCompleted={allSectionsCompleted}
+            isContentCompleted={isContentCompleted}
           />
 
           {content.mediaUrl && <MediaHero mediaUrl={content.mediaUrl} />}
@@ -94,6 +104,7 @@ export const ContentDetailPage = () => {
                     ? markSectionIncomplete(section.id)
                     : markSectionComplete(section.id)
                 }
+                isContentCompleted={isContentCompleted}
                 completed={completedSectionIdsSet.has(section.id)}
                 onNavigateNext={() => {
                   setActiveIndex(Math.min(idx + 1, sections.length - 1));
@@ -106,14 +117,20 @@ export const ContentDetailPage = () => {
             onPrev={() => goToPrev()}
             onNext={() => goToNext()}
             onComplete={async () => {
+              if (isContentCompleted) return;
+
               try {
-                await completeContent();
-                // TBI: Reward modal
-              } catch {}
+                const result = await completeContent();
+                if (result) openFeedback(FEEDBACK_TYPES.CONTENT, result);
+              } catch (error) {
+                console.error(error);
+              }
             }}
             disablePrev={activeIndex === 0}
             disableNext={activeIndex === sections.length - 1}
             completing={completing}
+            allCompleted={allSectionsCompleted}
+            isContentCompleted={isContentCompleted}
           />
         </main>
 
@@ -142,8 +159,8 @@ export const ContentDetailPage = () => {
             <div className="mt-6 text-sm text-gray-600">
               <div className="font-medium mb-2">Quick actions</div>
               <div className="flex flex-col gap-2">
-                <button className="px-3 py-2 border rounded" onClick={() => window.print()}>Print</button>
-                <button className="px-3 py-2 border rounded" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>Top</button>
+                <button className="px-3 py-2 border rounded cursor-pointer" onClick={() => window.print()}>Print</button>
+                <button className="px-3 py-2 border rounded cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>Top</button>
               </div>
             </div>
           </div>

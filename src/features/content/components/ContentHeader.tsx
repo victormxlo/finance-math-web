@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/Button";
 import { formatDate } from "@/shared/utils/formatDate";
-import type { FC } from "react";
 
 interface ContentHeaderProps {
   title: string;
@@ -10,8 +9,9 @@ interface ContentHeaderProps {
   onComplete: () => Promise<void>;
   completing?: boolean;
   allCompleted?: boolean;
+  isContentCompleted?: boolean;
 };
-export const ContentHeader: React.FC<ContentHeaderProps> = ({ title, createdAt, sectionsCount, onComplete, completing = false, allCompleted = false }) => {
+export const ContentHeader: React.FC<ContentHeaderProps> = ({ title, createdAt, sectionsCount, onComplete, completing = false, allCompleted = false, isContentCompleted = false }) => {
   return (
     <header className="mb-6">
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
@@ -26,13 +26,13 @@ export const ContentHeader: React.FC<ContentHeaderProps> = ({ title, createdAt, 
 
         <div className="flex items-center gap-3">
           <Button
-            variant={allCompleted ? "secondary" : "default"}
+            variant={isContentCompleted ? "secondary" : "default"}
             className="cursor-pointer"
             size="sm"
             onClick={onComplete}
-            disabled={completing}
+            disabled={isContentCompleted || completing || !allCompleted}
           >
-            {completing ? "Completing" : allCompleted ? "Completed" : "Complete content"}
+            {isContentCompleted ? "Conteúdo concluído" : completing ? "Concluindo..." : "Concluir conteúdo"}
           </Button>
         </div>
       </div>

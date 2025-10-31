@@ -25,7 +25,7 @@ export const contentService = {
   async getUserProgress(userId: string): Promise<UserContentProgressDTO[]> {
     await wait(120);
     if (!userId) return [];
-    return userId === "user-1" ? [...mockProgress] : [];
+    return userId === "88b8afb9-2080-48f8-a6be-622067876fc5" ? [...mockProgress] : [];
   },
 
   async completeContent(contentId: string): Promise<CompleteContentResponseDTO> {

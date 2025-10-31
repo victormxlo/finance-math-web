@@ -7,12 +7,13 @@ import remarkGfm from "remark-gfm";
 interface SectionBlockProps {
   section: ContentSectionDTO;
   isActive?: boolean;
+  isContentCompleted?: boolean;
   completed?: boolean;
   onMarkComplete?: () => void;
   onNavigateNext?: () => void;
 };
 
-export const SectionBlock: React.FC<SectionBlockProps> = ({ section, isActive = false, completed = false, onMarkComplete, onNavigateNext }) => {
+export const SectionBlock: React.FC<SectionBlockProps> = ({ section, isActive = false, isContentCompleted = false, completed = false, onMarkComplete, onNavigateNext }) => {
   const ref = useRef<HTMLDivElement | null>(null);
   
   useEffect(() => {
@@ -35,6 +36,7 @@ export const SectionBlock: React.FC<SectionBlockProps> = ({ section, isActive = 
             variant={completed ? "secondary" : "default"}
             className="cursor-pointer"
             onClick={onMarkComplete}
+            disabled={isContentCompleted}
           >
             {completed ? "Mark as not completed" : "Mark completed"}
           </Button>

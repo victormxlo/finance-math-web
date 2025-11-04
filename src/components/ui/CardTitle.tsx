@@ -1,0 +1,15 @@
+import { cn } from "@/lib/utils";
+import React from "react";
+
+export const CardTitle = React.forwardRef<
+  HTMLHeadingElement,
+  React.HTMLAttributes<HTMLHeadingElement>
+>(({ className, ...props }, ref) => (
+  <h3
+    ref={ref}
+    className={cn("text-lg font-semibold leading-none tracking-tight", className)}
+    {...props}
+  />
+));
+
+CardTitle.displayName = "CardTitle";

@@ -65,7 +65,7 @@ export const mockCompleteResponse: CompleteExerciseResponseDTO = {
 export const mockProgress: UserExerciseProgressDTO[] = [
   {
     profileId: "pf-1",
-    userId: "user-1",
+    userId: "88b8afb9-2080-48f8-a6be-622067876fc5",
     exerciseId: "25f6c78e-5111-4088-962e-09b9e828dc8b",
     exerciseQuestion: "What was the monthly interest rate ...",
     categoryId: null,

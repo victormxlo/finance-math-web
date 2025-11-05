@@ -39,7 +39,7 @@ export const exerciseService = {
 
   async getProgress(userId: string): Promise<UserExerciseProgressDTO[]> {
     await wait();
-    return userId === "user-1" ? [...mockProgress] : [];
+    return [...mockProgress];
   },
 
   async getExplanation(exerciseId: string): Promise<string> {

@@ -9,6 +9,7 @@ import { ProtectedRoute } from "./ProtectedRoute";
 import { ChallengePage } from "@/features/challenge/pages/ChallengePage";
 import { AchievementPage } from "@/features/achievement/pages/AchievementPage";
 import { ContentDetailPage } from "@/features/content/pages/ContentDetailPage";
+import { ExerciseDetailPage } from "@/features/exercise/pages/ExerciseDetailPage";
 
 export function AppRoutes() {
   return (
@@ -20,6 +21,7 @@ export function AppRoutes() {
       <Route path="/contents/:id" element={<ProtectedRoute><ContentDetailPage /></ProtectedRoute>} />
       <Route path="/achievements" element={<ProtectedRoute><AchievementPage /></ProtectedRoute>} />
       <Route path="/exercises" element={<ProtectedRoute><ExercisePage /></ProtectedRoute>} />
+      <Route path="/exercises/:id" element={<ProtectedRoute><ExerciseDetailPage /></ProtectedRoute>} />
       <Route path="/challenges" element={<ProtectedRoute><ChallengePage /></ProtectedRoute>} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>

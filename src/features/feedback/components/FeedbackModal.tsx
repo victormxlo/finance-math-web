@@ -12,11 +12,20 @@ import { FeedbackChallenges } from "./FeedbackChallenges";
 import type { UserChallengeProgressDTO } from "@/features/challenge/dtos/userChallengeProgressDto";
 import { FeedbackRecommendations } from "./FeedbackRecommendations";
 import type { RecommendedItemDTO } from "@/features/gamification/recommendedItemDto";
+import { useState } from "react";
+import { FEEDBACK_TYPES } from "../constants/feedbackTypes";
 
 export const FeedbackModal: React.FC = () => {
   const { isOpen, type, data, closeFeedback } = useFeedbackModal();
+  const [showExplanation, setShowExplanation] = useState<boolean>(false);
   
   if (!isOpen || !data) return null;
+
+  const hasExplanation = 
+    type === FEEDBACK_TYPES.EXERCISE 
+    && "explanation" in data
+    && typeof data.explanation === "string" 
+    && data.explanation.trim().length > 0;
 
   return (
     <AnimatePresence>
@@ -40,6 +49,28 @@ export const FeedbackModal: React.FC = () => {
           <FeedbackAchievements achievements={data.achievementsUnlocked as UserAchievementDTO[]} />
           <FeedbackChallenges challenges={data.challengesProgress as UserChallengeProgressDTO[]} />
           <FeedbackRecommendations items={data.nextRecommended as RecommendedItemDTO[]} />
+
+          {hasExplanation && (
+            <div className="mt-6 border-t pt-6">
+              <button
+                onClick={() => setShowExplanation((prev) => !prev)}
+                className="text-sm text-primary underline underline-offset-2 hover:text-primary/80 transition-colors"
+              >
+                {showExplanation ? "Ocultar explicação" : "Ver explicação"}
+              </button>
+
+              {showExplanation && (
+                <motion.div
+                  initial={{ opacity: 0, y: -5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -5 }}
+                  className="mt-4 text-sm text-gray-700 leading-relaxed bg-gray-50 p-4 rounded-lg-border"
+                >
+                  {data.explanation}
+                </motion.div>
+              )}
+            </div>
+          )}
 
           <div className="mt-8 flex justify-end">
             <Button className="cursor-pointer" onClick={closeFeedback}>Continue</Button>

@@ -2,7 +2,6 @@ import type { ContentSectionDTO } from "@/features/content/dtos/contentSectionDt
 import type { UserContentProgressDTO } from "@/features/content/dtos/userContentProgressDto";
 import type { CompleteContentResponseDTO } from "@/features/content/dtos/completeContentResponseDto";
 import type { ContentDTO } from "@/features/content/dtos/contentDto";
-import { DiffIcon } from "lucide-react";
 
 export const mockContents: ContentDTO[] = [
   {

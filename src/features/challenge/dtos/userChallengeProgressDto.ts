@@ -9,5 +9,5 @@ export interface UserChallengeProgressDTO {
   targetProgress: number;
   isCompleted: boolean;
   startedAt: string;
-  completedAt?: string;
+  completedAt?: string | null;
 }

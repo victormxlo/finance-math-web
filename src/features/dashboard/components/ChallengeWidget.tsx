@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/Button";
 import { Trophy } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { mockChallenges } from "../mocks/mockChallenges";
 import { ChallengeItem } from "./ChallengeItem";
+import { mockChallengeProgress } from "../mocks/progress/mockChallengeProgress";
 
 export function ChallengeWidget() {
   const navigate = useNavigate();
@@ -22,8 +22,8 @@ export function ChallengeWidget() {
       </header>
 
       <div className="space-y-4">
-        {mockChallenges.map((c) => (
-          <ChallengeItem key={c.id} challenge={c} />
+        {mockChallengeProgress.map((c) => (
+          <ChallengeItem key={c.challengeId} challengeProgress={c} />
         ))}
       </div>
     </section>

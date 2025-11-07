@@ -19,7 +19,6 @@ export function useExerciseProgress(userId?: string) {
 
     try {
       const res = await exerciseService.getProgress(userId);
-      console.log(res);
       setData(res);
     } catch (err: any) {
       setError(err?.message ?? "Failed to load exercise progress");

@@ -3,9 +3,10 @@ export interface ChallengeDTO {
   name: string;
   description: string;
   criteriaKey: string;
-  currentProgress: number;
-  targetProgress: number;
-  isCompleted: boolean;
-  startedAt: string;
-  completedAt?: string | null;
+  target: number;
+  experienceReward: number;
+  virtualCurrencyReward: number;
+  startDate: string;
+  endDate: string;
+  createdAt: string;
 };

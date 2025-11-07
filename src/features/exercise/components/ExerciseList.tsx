@@ -20,8 +20,6 @@ export const ExerciseList: React.FC<ExerciseListProps> = ({ exercises, progress 
     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
       {exercises.map((exercise) => {
         const completed = progress?.some((p) => p.exerciseId === exercise.id);
-        console.log(progress);
-        console.log(completed);
 
         return (
           <ExerciseCard 

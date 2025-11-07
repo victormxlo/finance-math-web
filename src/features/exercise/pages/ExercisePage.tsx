@@ -14,7 +14,6 @@ export function ExercisePage() {
 
   const { data: exercises, loading } = useExercises();
   const { data: progress } = useExerciseProgress(userId);
-  console.log(progress);
   const [filters, setFilters] = useState({ search: '', difficulty: '', status: '' });
 
   const filtered = useMemo(() => {

@@ -7,13 +7,13 @@ import { FeedbackReward } from "./FeedbackReward";
 import type { GamificationProfileSummaryDTO } from "@/features/profile/dtos/gamificationProfileSummaryDto";
 import type { RewardDTO } from "@/features/gamification/dtos/rewardDto";
 import { FeedbackAchievements } from "./FeedbackAchievements";
-import type { UserAchievementDTO } from "@/features/achievement/dtos/userAchievementDto";
 import { FeedbackChallenges } from "./FeedbackChallenges";
 import type { UserChallengeProgressDTO } from "@/features/challenge/dtos/userChallengeProgressDto";
 import { FeedbackRecommendations } from "./FeedbackRecommendations";
 import type { RecommendedItemDTO } from "@/features/gamification/recommendedItemDto";
 import { useState } from "react";
 import { FEEDBACK_TYPES } from "../constants/feedbackTypes";
+import type { UserAchievementUnlockedDTO } from "@/features/achievement/dtos/userAchievementUnlockedDto";
 
 export const FeedbackModal: React.FC = () => {
   const { isOpen, type, data, closeFeedback } = useFeedbackModal();
@@ -46,7 +46,7 @@ export const FeedbackModal: React.FC = () => {
         >
           <FeedbackHeader type={type as FeedbackType} />
           <FeedbackReward reward={data.reward as RewardDTO} profile={data.profile as GamificationProfileSummaryDTO} />
-          <FeedbackAchievements achievements={data.achievementsUnlocked as UserAchievementDTO[]} />
+          <FeedbackAchievements achievements={data.achievementsUnlocked as UserAchievementUnlockedDTO[]} />
           <FeedbackChallenges challenges={data.challengesProgress as UserChallengeProgressDTO[]} />
           <FeedbackRecommendations items={data.nextRecommended as RecommendedItemDTO[]} />
 

@@ -1,7 +1,7 @@
-import type { UserAchievementDTO } from "@/features/achievement/dtos/userAchievementDto";
+import type { UserAchievementUnlockedDTO } from "@/features/achievement/dtos/userAchievementUnlockedDto";
 
 interface FeedbackAchievementsProps {
-  achievements: UserAchievementDTO[];
+  achievements: UserAchievementUnlockedDTO[];
 };
 
 export const FeedbackAchievements: React.FC<FeedbackAchievementsProps> = ({ achievements }) => {

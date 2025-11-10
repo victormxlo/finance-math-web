@@ -1,4 +1,4 @@
-import type { UserAchievementDTO } from "@/features/achievement/dtos/userAchievementDto";
+import type { UserAchievementUnlockedDTO } from "@/features/achievement/dtos/userAchievementUnlockedDto";
 import type { UserChallengeProgressDTO } from "@/features/challenge/dtos/userChallengeProgressDto";
 import type { RewardDTO } from "@/features/gamification/dtos/rewardDto";
 import type { RecommendedItemDTO } from "@/features/gamification/recommendedItemDto";
@@ -13,7 +13,7 @@ export interface CompleteExerciseResponseDTO {
   reward?: RewardDTO;
   profile?: GamificationProfileSummaryDTO;
   completedAtUtc?: string;
-  achievementsUnlocked?: UserAchievementDTO[];
+  achievementsUnlocked?: UserAchievementUnlockedDTO[];
   challengesProgress?: UserChallengeProgressDTO[];
   nextRecommended?: RecommendedItemDTO[];
 };

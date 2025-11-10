@@ -12,7 +12,7 @@ export const SubcategoryList = ({ categories, onSelect, onBack }: SubcategoryLis
       {onBack && (
         <button
           onClick={onBack}
-          className="px-3 py-1 rounded-md text-sm text-gray-700 hover:bg-gray-100 transition"
+          className="px-3 py-1 rounded-md text-sm text-gray-700 hover:bg-gray-100 transition cursor-pointer"
         >
           ← Back to Categories
         </button>
@@ -23,7 +23,7 @@ export const SubcategoryList = ({ categories, onSelect, onBack }: SubcategoryLis
           <button
             key={subcategory.id}
             onClick={() => onSelect(subcategory.id)}
-            className="rounded-2xl shadow-md p-6 bg-white hover:shadow-lg transition-all text-left"
+            className="rounded-2xl shadow-md p-6 bg-white hover:shadow-lg transition-all text-left cursor-pointer"
           >
             <h3 className="text-lg font-semibold mb-1">{subcategory.name}</h3>
             <p className="text-sm text-gray-500">

@@ -1,6 +1,5 @@
 import { ContentCard } from "@/features/content/components/ContentCard";
 import type { ContentDTO } from "@/features/content/dtos/contentDto";
-import { useNavigate } from "react-router-dom";
 
 interface ContentListProps {
   contents: ContentDTO[];
@@ -13,7 +12,7 @@ export const ContentList: React.FC<ContentListProps> = ({ contents, completedIds
     {onBack && (
       <button
         onClick={onBack}
-        className="px-3 py-1 rounded-md text-sm text-gray-700 hover:bg-gray-100 transition"
+        className="px-3 py-1 rounded-md text-sm text-gray-700 hover:bg-gray-100 transition cursor-pointer"
       >
         ← Back to Subcategories
       </button>

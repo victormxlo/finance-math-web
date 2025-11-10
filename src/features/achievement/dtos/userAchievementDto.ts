@@ -1,8 +1,8 @@
 export interface UserAchievementDTO {
-  id: string;
-  name: string;
-  description?: string;
-  experienceReward: number;
-  virtualCurrencyReward: number;
+  profileId: string;
+  userId: string;
+  achievementId: string;
+  achievementName: string;
+  criteriaKey: string;
   unlockedAt: string;
 };

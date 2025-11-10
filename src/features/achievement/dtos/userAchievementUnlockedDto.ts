@@ -1,9 +1,8 @@
-export interface AchievementDTO {
+export interface UserAchievementUnlockedDTO {
   id: string;
   name: string;
   description: string;
-  criteriaKey: string;
   experienceReward: number;
   virtualCurrencyReward: number;
-  createdAt: string;
+  unlockedAt: string;
 };

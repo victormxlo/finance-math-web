@@ -18,6 +18,9 @@ export function ContentPage() {
 
   return (
     <div className="p-6 space-y-8">
+      <header>
+        <h1 className="text-2xl font-semibold mb-4">Conteúdos</h1>
+      </header>
       {!selectedCategory && (
         <CategoryList categories={categories} onSelect={setSelectedCategory} />
       )}

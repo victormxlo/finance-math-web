@@ -6,7 +6,7 @@ type MenuItem = {
   icon: React.ComponentType<{ size: number }>;
 };
 
-export const menuItems: MenuItem[] = [
+export const baseMenuItems: MenuItem[] = [
   { to: "/", label: "Dashboard", icon: Home },
   { to: "/contents", label: "Contents", icon: BookOpen },
   { to: "/exercises", label: "Exercises", icon: ClipboardCheck },

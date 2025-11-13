@@ -81,6 +81,7 @@ function getPageTitle(path: string) {
     "/challenges": "Challenges",
     "/achievements": "Achievements",
     "/profile": "Profile",
+    "/admin/reports": "Reports",
   };
 
   const exact = map[path];

@@ -150,7 +150,6 @@ export const ExerciseDetailPage: FC = ({}) => {
 
           <ExerciseActionsFooter
             onConfirm={handleConfirm}
-            onNext={undefined}
             onShowHint={!usedHint ? handleShowHint : undefined}
             confirming={validating || completing}
             completed={Boolean(isExerciseCompleted)}

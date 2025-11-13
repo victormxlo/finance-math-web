@@ -2,13 +2,19 @@ import { useAuth } from "@/features/auth/hooks/useAuth";
 import clsx from "clsx";
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
-import { menuItems } from "@/components/navigation/config/menuItems";
+import { baseMenuItems } from "@/components/navigation/config/menuItems";
 import { NavLink } from "react-router-dom";
-import { LogOut } from "lucide-react";
+import { BarChart, LogOut } from "lucide-react";
 
 export function Sidebar() {
   const { user, logout } = useAuth();
   const [collapsed, setCollapsed] = useState<boolean>(false);
+
+  const menuItems = [...baseMenuItems];
+
+  if (user?.type === "Admin") {
+    menuItems.splice(6, 0, { to: "/admin/reports", label: "Reports", icon: BarChart });
+  }
 
   return (
     <aside className={clsx(
@@ -60,4 +66,3 @@ export function Sidebar() {
     </aside>
   );
 };
-

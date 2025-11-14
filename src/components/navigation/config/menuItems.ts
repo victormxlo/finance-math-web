@@ -8,9 +8,9 @@ type MenuItem = {
 
 export const baseMenuItems: MenuItem[] = [
   { to: "/", label: "Dashboard", icon: Home },
-  { to: "/contents", label: "Contents", icon: BookOpen },
-  { to: "/exercises", label: "Exercises", icon: ClipboardCheck },
-  { to: "/challenges", label: "Challenges", icon: Target },
-  { to: "/achievements", label: "Achievements", icon: Trophy },
-  { to: "/profile", label: "Profile", icon: User },
+  { to: "/contents", label: "Conteúdos", icon: BookOpen },
+  { to: "/exercises", label: "Exercícios", icon: ClipboardCheck },
+  { to: "/challenges", label: "Desafios", icon: Target },
+  { to: "/achievements", label: "Conquistas", icon: Trophy },
+  { to: "/profile", label: "Perfil", icon: User },
 ];

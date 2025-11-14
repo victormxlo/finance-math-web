@@ -22,13 +22,13 @@ export function LearningPath() {
     <section aria-labelledby="learning-path-title" className="space-y-4">
       <header>
         <h2 id="learning-path-title" className="text-lg font-semibold">
-          Learning Path
+          Caminho de aprendizagem
         </h2>
       </header>
 
       {items.length === 0 ? (
         <p className="text-sm text-muted-foreground">
-          No content available.
+          Nenhum conteúdo disponível.
         </p>
       ) : (
         <ul className="space-y-3">

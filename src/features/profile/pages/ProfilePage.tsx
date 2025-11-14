@@ -53,7 +53,7 @@ export function ProfilePage() {
   if (!profile) {
     return (
       <div className="p-6 text-center text-muted-foreground">
-        Profile not found.
+        Perfil não encontrado.
       </div>
     );
   }

@@ -28,19 +28,19 @@ export function ReportPage() {
   const reports: { id: ReportType; title: string; description: string }[] = [
     {
       id: "user-engagement",
-      title: "User Engagement Report",
+      title: "Engajamento de usuários",
       description:
         "Mede o engajamento dos usuários com conteúdos, exercícios e desafios.",
     },
     {
       id: "activity-overview",
-      title: "Activity Overview Report",
+      title: "Visão geral de atividades",
       description:
         "Resumo das principais atividades dos usuários em toda a plataforma.",
     },
     {
       id: "challenges-summary",
-      title: "Challenges Summary Report",
+      title: "Resumo de desafios",
       description:
         "Apresenta o desempenho e conclusão dos desafios disponíveis.",
     },
@@ -77,7 +77,7 @@ export function ReportPage() {
                 disabled={isLoading}
                 className="w-full"
               >
-                {isLoading ? "Gerando..." : "Download Report"}
+                {isLoading ? "Gerando..." : "Gerar relatório"}
               </Button>
             </CardContent>
           </Card>

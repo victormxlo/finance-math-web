@@ -13,11 +13,11 @@ export function ChallengeWidget() {
         <div className="flex items-center gap-2">
           <Trophy className="h-5 w-5 text-primary" />
           <h2 className="text-lg font-semibold tracking-tight">
-            Active Challenges
+            Desafios ativos
           </h2>
         </div>
         <Button className="p-0 h-auto" size="sm" variant="link" onClick={() => navigate("/challenges")} >
-          View All
+          Ver todos
         </Button>
       </header>
 

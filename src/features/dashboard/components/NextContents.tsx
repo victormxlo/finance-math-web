@@ -27,10 +27,10 @@ export const NextContents: FC<NextContentsProps> = ({ contents, loading = false,
     <section aria-labelledby="next-contents-title">
       <div className="flex items-center justify-between mb-4">
         <h2 id="next-contents-title" className="text-lg font-semibold">
-          Next Contents
+          Próximos conteúdos
         </h2>
         <Link to="/contents" className="text-sm text-muted-foreground hover:underline">
-          See all
+          Ver todos
         </Link>
       </div>
 

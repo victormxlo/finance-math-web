@@ -38,7 +38,7 @@ export function RegisterForm() {
     <form onSubmit={handleSubmit} className="space-y-4">
       <input 
         type="text" 
-        placeholder="Username"
+        placeholder="Nome de usuário"
         className="w-full p-2 border rounded"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
@@ -46,7 +46,7 @@ export function RegisterForm() {
       />
       <input 
         type="text" 
-        placeholder="Full name"
+        placeholder="Nome completo"
         className="w-full p-2 border rounded"
         value={fullName}
         onChange={(e) => setFullName(e.target.value)}
@@ -62,7 +62,7 @@ export function RegisterForm() {
       />
       <input 
         type="password" 
-        placeholder="Password"
+        placeholder="Senha"
         value={password}
         className="w-full p-2 border rounded"
         onChange={(e) => setPassword(e.target.value)}

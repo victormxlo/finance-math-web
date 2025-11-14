@@ -27,10 +27,10 @@ export const AchievementsHighlight: FC<AchievementsHighlightProps> =
     <section aria-labelledby="achievements-title">
       <div className="flex items-center justify-between mb-4">
         <h2 id="achievements-title" className="text-lg font-semibold">
-          Achievements
+          Conquistas
         </h2>
         <a href="/achievements" className="text-sm text-muted-foreground hover:underline">
-          See all
+          Ver todos
         </a>
       </div>
 

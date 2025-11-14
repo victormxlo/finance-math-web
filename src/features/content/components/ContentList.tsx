@@ -14,7 +14,7 @@ export const ContentList: React.FC<ContentListProps> = ({ contents, completedIds
         onClick={onBack}
         className="px-3 py-1 rounded-md text-sm text-gray-700 hover:bg-gray-100 transition cursor-pointer"
       >
-        ← Back to Subcategories
+        ← Voltar para subcategorias
       </button>
     )}
 

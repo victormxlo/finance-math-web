@@ -53,7 +53,7 @@ export function ContentCard({ content }: { content: ContentDTO }) {
               className="text-sm font-medium text-primary hover:underline"
               aria-label={`Access ${content.title}`}
             >
-              Access
+              Acessar
             </Link>
           </div>
         </div>

@@ -43,7 +43,7 @@ export function LoginForm() {
       />
       <input
         type="password"
-        placeholder="Password"
+        placeholder="Senha"
         className="w-full p-2 border rounded"
         value={password}
         onChange={(e) => setPassword(e.target.value)}

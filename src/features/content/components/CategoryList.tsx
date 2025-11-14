@@ -15,7 +15,7 @@ export const CategoryList = ({ categories, onSelect }: CategoryListProps) => {
           className="rounded-2xl shadow-md p-6 bg-white hover:shadow-lg transition-all text-left cursor-pointer"
         >
           <h2 className="text-xl font-semibold mb-2">{category.name}</h2>
-          <p className="text-sm text-gray-500">Explore</p>
+          <p className="text-sm text-gray-500">Explorar</p>
         </button>
       ))}
     </div>

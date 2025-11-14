@@ -12,10 +12,10 @@ export function WelcomeBanner() {
       className="bg-primary text-primary-foreground rounded-lg p-6 shadow-lg"
     >
       <h1 className="text-2xl font-bold">
-        Welcome{user?.fullName ? `, ${user.fullName}` : ""}!
+        Bem-vindo{user?.fullName ? `, ${user.fullName}` : ""}!
       </h1>
       <p className="mt-2 text-primary-foreground/90 text-sm">
-        Continue your journey into financial mathematics. Let's learn more today?
+        Prepare-se para conquistar seus objetivos financeiros de forma divertida e interativa
       </p>
     </motion.div>
   );

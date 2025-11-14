@@ -18,13 +18,13 @@ export const ContentCard: FC<ContentCardProps> = ({ content, completed = false }
 
       <div className="mt-4 flex justify-between items-center">
         <span className={`text-sm font-medium ${completed ? "text-green-600" : "text-gray-500"}`}>
-          {completed ? "✔ Completed" : "⏳ Not started"}
+          {completed ? "✔ Concluído" : "⏳ Não iniciado"}
         </span>
         <button
           className="px-3 py-1 rounded-md bg-blue-600 text-white text-sm hover:brightness-95 transition cursor-pointer"
           onClick={() => navigate(`/contents/${content.id}`)}
         >
-          Open
+          Abrir
         </button>
       </div>
     </div>

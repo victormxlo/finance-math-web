@@ -14,7 +14,7 @@ export const SubcategoryList = ({ categories, onSelect, onBack }: SubcategoryLis
           onClick={onBack}
           className="px-3 py-1 rounded-md text-sm text-gray-700 hover:bg-gray-100 transition cursor-pointer"
         >
-          ← Back to Categories
+          ← Voltar para categorias
         </button>
       )}
 
@@ -27,7 +27,7 @@ export const SubcategoryList = ({ categories, onSelect, onBack }: SubcategoryLis
           >
             <h3 className="text-lg font-semibold mb-1">{subcategory.name}</h3>
             <p className="text-sm text-gray-500">
-              {subcategory.contentIds.length} contents
+              {subcategory.contentIds.length} {subcategory.contentIds.length > 1 ? "conteúdos" : "conteúdo"}
             </p>
           </button>
         ))}

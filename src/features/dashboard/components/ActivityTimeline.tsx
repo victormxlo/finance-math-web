@@ -14,7 +14,7 @@ export const ActivityTimeline: FC<{ limit?: number }> = ({ limit = 4 }) => {
     <section aria-labelledby="activity-timeline-title">
       <div className="flex items-center justify-between mb-4">
         <h2 id="activity-timeline-title" className="text-lg font-semibold">
-          Activity Timeline
+          Linha do tempo de atividades
         </h2>
       </div>
 
@@ -34,7 +34,7 @@ export const ActivityTimeline: FC<{ limit?: number }> = ({ limit = 4 }) => {
         <>
           <AnimatePresence initial={false}>
             {events.length === 0 ? (
-              <p className="text-sm text-muted-foreground">No activity recorded yet.</p>
+              <p className="text-sm text-muted-foreground">Nenhuma atividade foi registrada ainda.</p>
             ) : (
               <ul className="space-y-2" role="list">
                 {events.map((ev) =>(

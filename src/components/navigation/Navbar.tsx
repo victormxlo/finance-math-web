@@ -76,11 +76,11 @@ function StatusItem({ icon, label }: { icon: React.ReactNode; label: React.React
 function getPageTitle(path: string) {
   const map: Record<string, string> = {
     "/": "Dashboard",
-    "/contents": "Contents",
-    "/exercises": "Exercises",
-    "/challenges": "Challenges",
-    "/achievements": "Achievements",
-    "/profile": "Profile",
+    "/contents": "Conteúdos",
+    "/exercises": "Exercícios",
+    "/challenges": "Desafios",
+    "/achievements": "Conquistas",
+    "/profile": "Perfil",
     "/admin/reports": "Reports",
   };
 

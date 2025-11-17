@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import { Award, Coins, Star } from "lucide-react";
 import {  Link, useLocation, useNavigate } from "react-router-dom";
 import { AvatarInitials } from "@/components/ui/AvatarInitials";
+import logoSrc from "@/assets/branding/numera-logo.png";
 
 export const Navbar: React.FC = () => {
   const location = useLocation();
@@ -10,8 +11,6 @@ export const Navbar: React.FC = () => {
   const { username, xp, levelName, virtualCurrency } = useNavbarProfile();
 
   const pageTitle = getPageTitle(location.pathname);
-
-  const logoSrc = "";
 
   return (
     <header

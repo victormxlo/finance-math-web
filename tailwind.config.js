@@ -9,7 +9,7 @@ export default {
       colors: {
         destructive: "#ef4444", // red-500
         "destructive-foreground": "#ffffff", // texto branco
-      }
+      },
     },
   },
   plugins: [],

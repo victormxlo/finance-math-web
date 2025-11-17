@@ -1,64 +1,117 @@
-import { createContext, useState, useEffect, type ReactNode, useCallback  } from "react";
-import type { AuthContextType } from "./authContextType";
+import { createContext, useState, useEffect, type ReactNode, useCallback, useMemo  } from "react";
 import { authStorage } from "@/features/auth/storage/authStorage";
 import type { AuthResponse } from "@/features/auth/dtos/authResponse";
 import type { UserDTO } from "@/features/auth/dtos/userDto";
+import { useLoading } from "@/app/hooks/useLoading";
+import { AuthService } from "../services/authService";
+import { mapApiError } from "@/lib/api/apiErrorMapper";
+import type { RegisterPayload } from "../dtos/registerPayload";
+import type { LoginPayload } from "../dtos/loginPayload";
 
-export const AuthContext = 
-  createContext<AuthContextType | undefined>(undefined);
-
-interface AuthProviderProps {
-  children: ReactNode;
+export interface AuthContextType {
+  user: UserDTO | null;
+  token: string | null;
+  isAuthenticated: boolean;
+  isInitializing: boolean;
+  login: (payload: LoginPayload) => Promise<AuthResponse>;
+  register: (payload: RegisterPayload) => Promise<AuthResponse>;
+  logout: () => void;
 };
 
-export function AuthProvider({ children }: AuthProviderProps) {
+export const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<UserDTO | null>(null);
   const [token, setToken] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isInitializing, setIsInitializing] = useState<boolean>(true);
 
-  const login = (data: AuthResponse) => {
-    const user: UserDTO = data;
-    const token = data.token!;
+  const { showLoading, hideLoading } = useLoading();
 
-    setUser(user);
-    setToken(token);
+  const login = useCallback(async (payload: LoginPayload) => {
+    showLoading();
+    try {
+      const response = await AuthService.login(payload);
+      const userData = response as unknown as UserDTO;
+      const accessToken = (response as any).token as string | undefined;
 
-    authStorage.setUser(user);
-    authStorage.setToken(token);
-  };
+      setUser(userData);
+      setToken(accessToken ?? null);
+
+      if (accessToken) authStorage.setToken(accessToken);
+      if (userData) authStorage.setUser(userData);
+
+      return response;
+    } catch (err: any) {
+      throw mapApiError(err);
+    } finally {
+      hideLoading();
+    }
+  }, [showLoading, hideLoading]);
+
+  const register = useCallback(async (payload: RegisterPayload) => {
+    showLoading();
+    try {
+      const response = await AuthService.register(payload);
+      const userData = response as unknown as UserDTO;
+      const accessToken = (response as any).token as string | undefined;
+
+      setUser(userData);
+      setToken(accessToken ?? null);
+
+      if (accessToken) authStorage.setToken(accessToken);
+      if (userData) authStorage.setUser(userData);
+
+      return response;
+    } catch (err: any) {
+      throw mapApiError(err);
+    } finally {
+      hideLoading();
+    }
+  }, [showLoading, hideLoading]);
 
   const logout = useCallback(() => {
     setUser(null);
     setToken(null);
-
     authStorage.removeToken();
     authStorage.removeUser();
   }, []);
 
   useEffect(() => {
-    const storedToken = authStorage.getToken();
-    const storedUser = authStorage.getUser();
+    const initialize = async () => {
+      showLoading();
+      try {
+        const storedToken = authStorage.getToken();
+        const storedUser = authStorage.getUser();
 
-    if (storedToken && storedUser){
-      setToken(storedToken);
-      setUser(JSON.parse(storedUser));
-    }
+        if (storedToken) setToken(storedToken);
+        if (storedUser) {
+          try {
+            setUser(JSON.parse(storedUser));
+          } catch {
+            authStorage.removeUser();
+          }
+        }
+      } finally {
+        setIsInitializing(false);
+        hideLoading();
+      }
+    };
 
-    setIsLoading(false);
+    initialize();
   }, []);
 
-  const value: AuthContextType = {
-    user,
-    token,
-    isAuthenticated: Boolean(token && user),
-    isLoading,
-    login,
-    logout
-  };
-
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
+  const value = useMemo(
+    () => ({
+      user,
+      token,
+      isAuthenticated: Boolean(user && token),
+      isInitializing,
+      login,
+      register,
+      logout,
+    }),
+    [user, token, isInitializing, login, register, logout]
   );
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

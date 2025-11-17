@@ -2,10 +2,10 @@ import { Button } from "@/components/ui/Button";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/features/auth/hooks/useAuth";
-import { AuthService } from "../services/authService";
 
 export function RegisterForm() {
-  const { login, isAuthenticated } = useAuth();
+  const { register } = useAuth();
+
   const [username, setUsername] = useState("");
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -22,13 +22,10 @@ export function RegisterForm() {
 
     try {
       const type = 0;
-      const response = await AuthService.register({ username, fullName, email, password, type });
-      login(response);
-
+      await register({ username, fullName, email, password, type });
       navigate("/");
     } catch (err: any) {
-      console.error(err);
-      setError(err?.message);
+      setError(err?.message ?? "Erro ao criar conta.");
     } finally {
       setLoading(false);
     }
@@ -69,6 +66,7 @@ export function RegisterForm() {
         required
       />
       {error && <p className="text-red-500 text-sm">{error}</p>}
+
       <Button
         type="submit"
         size="lg"

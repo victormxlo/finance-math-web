@@ -2,10 +2,10 @@ import { useAuth } from "@/features/auth/hooks/useAuth";
 import { Button } from "@/components/ui/Button";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthService } from "@/features/auth/services/authService";
 
 export function LoginForm() {
-  const { login, isAuthenticated } = useAuth();
+  const { login } = useAuth();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -19,13 +19,10 @@ export function LoginForm() {
     setError(null);
 
     try {
-      const response = await AuthService.login({ email, password });
-      login(response);
-
+      await login({ email, password });
       navigate("/");
     } catch (err: any) {
-      console.error(err);
-      setError(err?.message);
+      setError(err?.message ?? "Erro ao efetuar login.");
     } finally {
       setLoading(false);
     }
@@ -50,6 +47,7 @@ export function LoginForm() {
         required
       />
       {error && <p className="text-red-500 text-sm">{error}</p>}
+
       <Button 
         type="submit"
         size="lg"

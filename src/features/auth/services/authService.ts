@@ -1,4 +1,4 @@
-import { loginApi, registerApi } from "@/features/auth/api/authApi";
+import { authApi } from "@/features/auth/api/authApi";
 import { mapApiError } from "@/lib/api/apiErrorMapper";
 import type { LoginPayload } from "@/features/auth/dtos/loginPayload";
 import type { RegisterPayload } from "@/features/auth/dtos/registerPayload";
@@ -6,7 +6,7 @@ import type { RegisterPayload } from "@/features/auth/dtos/registerPayload";
 export const AuthService = {
   async login(payload: LoginPayload) {
     try {
-      const response = await loginApi(payload);
+      const response = await authApi.login(payload);
       return response;
     } catch (error: any) {
       throw mapApiError(error);
@@ -15,7 +15,7 @@ export const AuthService = {
 
   async register(payload: RegisterPayload) {
     try {
-      const response = await registerApi(payload);
+      const response = authApi.register(payload);
       return response;
     } catch (error: any) {
       throw mapApiError(error);

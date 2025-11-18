@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, type ReactNode, useCallback, useMemo  } from "react";
+import { createContext, useState, useEffect, useCallback, useMemo  } from "react";
 import { authStorage } from "@/features/auth/storage/authStorage";
 import type { AuthResponse } from "@/features/auth/dtos/authResponse";
 import type { UserDTO } from "@/features/auth/dtos/userDto";
@@ -7,6 +7,7 @@ import { AuthService } from "../services/authService";
 import { mapApiError } from "@/lib/api/apiErrorMapper";
 import type { RegisterPayload } from "../dtos/registerPayload";
 import type { LoginPayload } from "../dtos/loginPayload";
+import { gamificationService } from "@/features/gamification/services/gamificationService";
 
 export interface AuthContextType {
   user: UserDTO | null;
@@ -60,6 +61,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
       if (accessToken) authStorage.setToken(accessToken);
       if (userData) authStorage.setUser(userData);
+
+      if (userData?.id) {
+        (async () => {
+          try {
+            await gamificationService.createProfile(userData.id);
+          } catch (e: any) {
+            console.error("Falha ao criar perfil de usuário");
+            throw mapApiError(e);
+          }
+        })();
+      };
 
       return response;
     } catch (err: any) {

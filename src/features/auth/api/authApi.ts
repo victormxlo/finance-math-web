@@ -3,12 +3,12 @@ import type { LoginPayload } from "@/features/auth/dtos/loginPayload";
 import type { RegisterPayload } from "@/features/auth/dtos/registerPayload";
 import type { AuthResponse } from "@/features/auth/dtos/authResponse";
 
-export async function loginApi(payload: LoginPayload): Promise<AuthResponse> {
-  const response = await api.post("/Auth/login", payload);
-  return response.data;
-};
+export const authApi = {
+  login(payload: LoginPayload): Promise<AuthResponse> {
+    return api.post("/Auth/login", payload).then(res => res.data);
+  },
 
-export async function registerApi(payload: RegisterPayload): Promise<AuthResponse> {
-  const response = await api.post("/Auth/register", payload);
-  return response.data;
+  register(payload: RegisterPayload): Promise<AuthResponse> {
+    return api.post("/Auth/register", payload).then(res => res.data);
+  },
 };

@@ -1,11 +1,13 @@
 import { useState, useCallback, useEffect } from "react";
 import type { UserExerciseProgressDTO } from "../dtos/userExerciseProgressDto";
 import { exerciseService } from "../services/exerciseService";
+import { useLoading } from "@/app/hooks/useLoading";
 
 export function useExerciseProgress(userId?: string) {
   const [data, setData] = useState<UserExerciseProgressDTO[] | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { showLoading, hideLoading } = useLoading();
 
   const load = useCallback(async () => {
     if (!userId) {
@@ -15,17 +17,19 @@ export function useExerciseProgress(userId?: string) {
     }
 
     setLoading(true);
+    showLoading();
     setError(null);
 
     try {
       const res = await exerciseService.getProgress(userId);
       setData(res);
     } catch (err: any) {
-      setError(err?.message ?? "Failed to load exercise progress");
+      setError(err?.message ?? "Falha ao carregar progresso de exercícios do usuário");
     } finally {
       setLoading(false);
+      hideLoading();
     }
-  }, [userId]);
+  }, [userId, showLoading, hideLoading]);
 
   useEffect(() => {
     if (!userId) return;

@@ -15,7 +15,7 @@ export function useCompleteContent() {
       setResult(res);
       return res;
     } catch (err: any) {
-      setError(err?.message ?? "Failed to complete content");
+      setError(err?.message ?? "Falha ao concluir conteúdo");
       throw err;
     } finally {
       setLoading(false);

@@ -1,11 +1,14 @@
 import { useState, useCallback, useEffect } from "react";
 import { contentService } from "../services/contentService";
 import type { ContentSectionDTO } from "../dtos/contentSectionDto";
+import { useLoading } from "@/app/hooks/useLoading";
 
 export function useContentSections(contentId?: string, initialLoad = true) {
   const [data, setData] = useState<ContentSectionDTO[] | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+
+  const { showLoading, hideLoading } = useLoading();
 
   const load = useCallback(
     async (signal?: AbortSignal) => {
@@ -16,6 +19,7 @@ export function useContentSections(contentId?: string, initialLoad = true) {
       }
 
       setLoading(true);
+      showLoading();
       setError(null);
 
       try {
@@ -24,12 +28,15 @@ export function useContentSections(contentId?: string, initialLoad = true) {
         setData(sections);
       } catch (err: any) {
         if (signal?.aborted) return;
-        setError(err?.message ?? "Failed to load sections");
+        setError(err?.message ?? "Falha ao carregar seções");
       } finally {
-        if (!signal?.aborted) setLoading(false);
+        if (!signal?.aborted) {
+          setLoading(false); 
+          hideLoading();
+        }
       }
     },
-    [contentId]
+    [contentId, showLoading, hideLoading]
   );
 
   useEffect(() => {

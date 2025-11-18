@@ -24,7 +24,7 @@ export function useContentProgress(userId?: string, contentId?: string) {
         setData(all);
       } catch (err: any) {
         if (signal?.aborted) return;
-        setError(err?.message ?? "Failed to load progress");
+        setError(err?.message ?? "Falha ao carregar progresso de conteúdos do usuário");
       } finally {
         if (!signal?.aborted) setLoading(false);
       }

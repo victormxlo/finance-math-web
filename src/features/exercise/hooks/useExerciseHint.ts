@@ -1,12 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
 import type { ExerciseHintDTO } from "../dtos/exerciseHintDto";
 import { exerciseService } from "../services/exerciseService";
+import { useLoading } from "@/app/hooks/useLoading";
 
 export function useExerciseHints(exerciseId?: string) {
   const [hints, setHints] = useState<ExerciseHintDTO[] | null>(null);
   const [visibleCount, setVisibleCount] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { showLoading, hideLoading } = useLoading();
 
   const load = useCallback(async () => {
     if (!exerciseId) {
@@ -16,17 +18,19 @@ export function useExerciseHints(exerciseId?: string) {
       return;
     }
     setLoading(true);
+    showLoading();
     setError(null);
     try {
       const items = await exerciseService.getHints(exerciseId);
       setHints(items);
       setVisibleCount(0);
     } catch (err: any) {
-      setError(err?.message ?? "Failed to load hints");
+      setError(err?.message ?? "Falha ao carregar dicas");
     } finally {
       setLoading(false);
+      hideLoading();
     }
-  }, [exerciseId]);
+  }, [exerciseId, showLoading, hideLoading]);
 
   useEffect(() => {
     void load();

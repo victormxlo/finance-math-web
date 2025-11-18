@@ -1,10 +1,43 @@
-import { mockContents } from "../mocks/mockContents";
+import { useCallback, useEffect, useState } from "react";
+import { contentService } from "@/features/content/services/contentService";
+import type { ContentDTO } from "@/features/content/dtos/contentDto";
+import { useLoading } from "@/app/hooks/useLoading";
 
-export const useContents = (selectedCategory?: string | null, selectedSubcategory?: string | null) => {
-  const contents = mockContents.filter(
-    (content) =>
-      content.categoryId === selectedCategory || content.categoryId === selectedSubcategory
-  );
+export function useContents(
+  selectedCategory?: string | null,
+  selectedSubcategory?: string | null
+) {
+  const [contents, setContents] = useState<ContentDTO[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+  const { showLoading, hideLoading } = useLoading();
 
-  return { contents };
+  const load = useCallback(async () => {
+    setLoading(true);
+    showLoading();
+    setError(null);
+
+    try {
+      const all = await contentService.getAll();
+
+      const filtered = all.filter(
+        c =>
+          c.categoryId === selectedCategory ||
+          c.categoryId === selectedSubcategory
+      );
+
+      setContents(filtered);
+    } catch (err: any) {
+      setError(err?.message ?? "Falha ao carregar conteudos");
+    } finally {
+      setLoading(false);
+      hideLoading();
+    }
+  }, [selectedCategory, selectedSubcategory, showLoading, hideLoading]);
+
+  useEffect(() => {
+    void load();
+  }, [load]);
+
+  return { contents, loading, error, reload: load };
 };

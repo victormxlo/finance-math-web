@@ -9,7 +9,7 @@ import type { CompleteContentResponseDTO } from "../dtos/completeContentResponse
 import type { UserContentProgressDTO } from "../dtos/userContentProgressDto";
 
 export function useContentDetail(contentId?: string, userId?: string) {
-  const { data: content, loading: loadingContent, error: errorContent, reload: reloadContent } = useContent(contentId);
+  const { data: content, error: errorContent, reload: reloadContent } = useContent(contentId);
   const { data: sections, loading: loadingSections, error: errorSections, reload: reloadSections } = useContentSections(contentId);
   const { data: progressEntries, loading: loadingProgress, reload: reloadProgress } = useContentProgress(userId ?? undefined, contentId);
   const { complete, loading: completing, result: completeResult, error: completeError } = useCompleteContent();
@@ -23,7 +23,7 @@ export function useContentDetail(contentId?: string, userId?: string) {
 
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
-  const loading = loadingContent || loadingSections || loadingProgress;
+  const loading = loadingSections || loadingProgress;
   const error = errorContent ?? errorSections ?? null;
 
   const orderedSections: ContentSectionDTO[] = useMemo(() => (sections ? [...sections].sort((a, b) => a.order - b.order) : []), [sections]);

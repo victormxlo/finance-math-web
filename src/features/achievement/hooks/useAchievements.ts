@@ -1,26 +1,31 @@
 import { useCallback, useEffect, useState } from "react";
 import type { AchievementDTO } from "@/features/achievement/dtos/achievementDto";
 import { achievementService } from "@/features/achievement/services/achievementService";
+import { useLoading } from "@/app/hooks/useLoading";
 
 export function useAchievements() {
   const [data, setData] = useState<AchievementDTO[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
+  const { showLoading, hideLoading } = useLoading();
+
   const load = useCallback(async () => {
     setLoading(true);
+    showLoading();
     setError(null);
 
     try {
       const response = await achievementService.getAll();
       setData(response);
     } catch (err: any) {
-      setError(err?.message ?? "Failed to load achievements");
+      setError(err?.message ?? "Falha ao carregar conquistas");
       setData([]);
     } finally {
       setLoading(false);
+      hideLoading();
     }
-  }, []);
+  }, [showLoading, hideLoading]);
 
   useEffect(() => {
     void load();

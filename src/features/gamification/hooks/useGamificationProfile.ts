@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import type { GamificationProfileDTO } from "../dtos/gamificationProfileDto";
 import { useAuth } from "@/features/auth/hooks/useAuth";
 import { gamificationService } from "../services/gamificationService";
+import { useLoading } from "@/app/hooks/useLoading";
 
 export function useGamificationProfile(userId: string) {
   const { user } = useAuth();
@@ -12,6 +13,8 @@ export function useGamificationProfile(userId: string) {
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState<boolean>(false);
 
+  const { showLoading, hideLoading } = useLoading();
+
   const load = useCallback(async () => {
     if (!resolvedUserId) {
       setData(null);
@@ -19,26 +22,30 @@ export function useGamificationProfile(userId: string) {
     }
 
     setLoading(true);
+    showLoading();
     setError(null);
 
     try {
       const response = await gamificationService.getProfile(resolvedUserId);
       setData(response);
     } catch (err: any) {
-      setError(err?.message ?? "Failed to load profile");
+      setError(err?.message ?? "Falha ao carregar perfil");
       setData(null);
     } finally {
       setLoading(false);
+      hideLoading();
     }
-  }, [resolvedUserId]);
+  }, [resolvedUserId, showLoading, hideLoading]);
 
   const changeUsername = useCallback(async (newUsername: string) => {
     if (!resolvedUserId) throw new Error("User id missing");
     setSaving(true);
+    setLoading(true);
+    showLoading();
 
     try {
       const op = await gamificationService.changeUsername(resolvedUserId, newUsername);
-      if (!op) throw new Error("Failed to change username");
+      if (!op) throw new Error("Falha ao modificar nome de usuário");
 
       const updatedProfile = await gamificationService.getProfile(resolvedUserId);
       setData(updatedProfile);
@@ -47,8 +54,10 @@ export function useGamificationProfile(userId: string) {
       throw err;
     } finally {
       setSaving(false);
+      setLoading(false);
+      hideLoading();
     }
-  }, [resolvedUserId]);
+  }, [resolvedUserId, showLoading, hideLoading]);
 
   useEffect(() => {
     load();

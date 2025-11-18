@@ -1,35 +1,36 @@
 import { useState, useCallback, useEffect } from "react";
-import { contentService } from "../services/contentService";
-import type { ContentDTO } from "../dtos/contentDto";
+import { contentService } from "@/features/content/services/contentService";
+import type { ContentDTO } from "@/features/content/dtos/contentDto";
+import { useLoading } from "@/app/hooks/useLoading";
 
 export function useContent(contentId?: string) {
+  const { showLoading, hideLoading } = useLoading();
   const [data, setData] = useState<ContentDTO | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   const load = useCallback(
     async (signal?: AbortSignal) => {
       if (!contentId) {
         setData(null);
-        setError(null);
         return;
       }
 
-      setLoading(true);
+      showLoading();
       setError(null);
 
       try {
         const result = await contentService.getById(contentId);
         if (signal?.aborted) return;
+
         setData(result);
       } catch (err: any) {
         if (signal?.aborted) return;
-        setError(err?.message ?? "Failed to load content");
+        setError(err?.message ?? "Falha ao carregar conteúdo");
       } finally {
-        if (!signal?.aborted) setLoading(false);
+        hideLoading();
       }
     },
-    [contentId]
+    [contentId, showLoading, hideLoading]
   );
 
   useEffect(() => {
@@ -38,9 +39,5 @@ export function useContent(contentId?: string) {
     return () => controller.abort();
   }, [load]);
 
-  const reload = useCallback(() => {
-    void load();
-  }, [load]);
-
-  return { data, loading, error, reload };
-}
+  return { data, error, reload: () => load() };
+};

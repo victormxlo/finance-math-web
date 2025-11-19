@@ -27,7 +27,7 @@ export const SectionBlock: React.FC<SectionBlockProps> = ({ section, isActive = 
       <header className="mb-4 flex items-start justify-between gap-4">
         <div>
           <h3 className="text-lg font-semibold">{section.title}</h3>
-          <div className="text-xs text-gray-500">Section {section.order + 1}</div>
+          <div className="text-xs text-gray-500">Seção {section.order + 1}</div>
         </div>
 
         <div className="flex items-center gap-2">

@@ -3,7 +3,7 @@ import { Coins, Gift, Star } from "lucide-react";
 
 export function AchievementCard({ achievement }: { achievement: AchievementDTO } ) {
   return (
-    <div className="bg-card rounded-lg p-4 shadow-sm border min-w-[220px]">
+    <div className="bg-card rounded-lg p-4 shadow-sm border min-w-[260px]">
       <div className="flex items-start gap-3">
         <div className="bg-yellow-50 text-yellow-700 rounded-md p-2">
           <Star className="w-5 h-5" />

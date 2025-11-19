@@ -9,11 +9,14 @@ interface AchievementListProps {
 };
 
 export const AchievementList: FC<AchievementListProps> = ({ achievements, progress }) => {
-  const map = new Map(progress.map((p) => [p.achievementId, p]));
+  const safeProgress = Array.isArray(progress) ? progress : [];
+  const map = new Map(safeProgress.map((p) => [p.achievementId, p]));
+
+  const safeAchievements = Array.isArray(achievements) ? achievements : [];
 
   return (
     <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
-      {achievements.map((a) => {
+      {safeAchievements.map((a) => {
         const unlocked = map.get(a.id);
 
         return (

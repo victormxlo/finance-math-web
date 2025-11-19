@@ -5,5 +5,5 @@ export interface UserContentProgressDTO {
   contentTitle: string;
   categoryId: string;
   categoryName: string;
-  completedAt: string; // ISO
+  completedAt: string;
 };

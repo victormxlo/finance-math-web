@@ -40,37 +40,37 @@ export function UserSettingsSection({
     <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
       <Card>
         <CardHeader>
-          <CardTitle>Change Username</CardTitle>
+          <CardTitle>Alterar nome de usuário</CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
           <Input
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            placeholder="New username"
+            placeholder="Novo nome de usuário"
           />
           <Button
             onClick={handleChangeUsername}
             disabled={isChangingUsername || username === currentUsername}
           >
-            {isChangingUsername ? "Saving..." : "Save"}
+            {isChangingUsername ? "Salvando..." : "Salvar"}
           </Button>
         </CardContent>
       </Card>
 
       <Card>
         <CardHeader>
-          <CardTitle>Change Password</CardTitle>
+          <CardTitle>Alterar senha</CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
           <Input
             type="password"
-            placeholder="Current password"
+            placeholder="Senha atual"
             value={passwords.current}
             onChange={(e) => setPasswords({ ...passwords, current: e.target.value })}
           />
           <Input
             type="password"
-            placeholder="New password"
+            placeholder="Nova senha"
             value={passwords.new}
             onChange={(e) => setPasswords({ ...passwords, new: e.target.value })}
           />

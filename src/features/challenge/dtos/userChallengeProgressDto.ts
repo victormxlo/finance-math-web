@@ -10,4 +10,4 @@ export interface UserChallengeProgressDTO {
   isCompleted: boolean;
   startedAt: string;
   completedAt?: string | null;
-}
+};

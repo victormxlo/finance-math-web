@@ -1,10 +1,15 @@
 import { Button } from "@/components/ui/Button";
 import { Trophy } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ChallengeItem } from "./ChallengeItem";
-import { mockChallengeProgress } from "../mocks/progress/mockChallengeProgress";
+import { useAuth } from "@/features/auth/hooks/useAuth";
+import { useChallengeWidget } from "../hooks/useChallengeWidget";
 
 export function ChallengeWidget() {
+  const { user } = useAuth();
+  const { challenges } = useChallengeWidget(user?.id);
+  const isEmpty = challenges.length === 0;
+
   const navigate = useNavigate();
 
   return (
@@ -16,13 +21,19 @@ export function ChallengeWidget() {
             Desafios ativos
           </h2>
         </div>
-        <Button className="p-0 h-auto" size="sm" variant="link" onClick={() => navigate("/challenges")} >
+        {!isEmpty && <Button className="p-0 h-auto" size="sm" variant="link" onClick={() => navigate("/challenges")} >
           Ver todos
-        </Button>
+        </Button>}
       </header>
 
+      {isEmpty && (
+        <p className="text-sm text-muted-foreground">
+          Nenhum desafio ativo no momento. Confira os <Link to="/challenges" className="text-sm text-primary hover:underline">desafios disponíveis</Link>.
+        </p>
+      )}
+
       <div className="space-y-4">
-        {mockChallengeProgress.map((c) => (
+        {challenges.map((c) => (
           <ChallengeItem key={c.challengeId} challengeProgress={c} />
         ))}
       </div>

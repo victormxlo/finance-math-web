@@ -45,7 +45,7 @@ export function ContentCard({ content }: { content: ContentDTO }) {
           <div className="flex items-center gap-2">
             {isNew && (
               <span className="text-xs bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full">
-                New
+                Novo
               </span>
             )}
             <Link

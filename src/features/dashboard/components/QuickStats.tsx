@@ -1,15 +1,28 @@
 import { motion } from "framer-motion";
-import { quickStatsItems } from "../constants/quickStatsItems";
+import { useAuth } from "@/features/auth/hooks/useAuth";
+import { useQuickStats } from "../hooks/useQuickStats";
+import { BookOpen, BookCheck, Trophy, Star, Calendar } from "lucide-react";
 
 export function QuickStats() {
+  const { user } = useAuth();
+  const { data } = useQuickStats(user?.id);
+
+  const items = [
+    { icon: BookOpen, label: "Conteúdos concluídos", value: data?.completedContents ?? "-" },
+    { icon: BookCheck, label: "Exercícios resolvidos", value: data?.resolvedExercises ?? "-" },
+    { icon: Trophy, label: "Desafios completados", value: data?.completedChallenges ?? "-" },
+    { icon: Star, label: "Conquistas", value: data?.achievements ?? "-" },
+    { icon: Calendar, label: "Streak atual", value: data?.currentStreak ?? "-" }
+  ];
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4 }}
-      className="grid grid-cols-2 md:grid-cols-4 gap-4"
+      className="grid grid-flow-col auto-cols-fr gap-4"
     >
-      {quickStatsItems.map((stat, index) => (
+      {items.map((stat, index) => (
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}

@@ -4,4 +4,5 @@ export interface UserExerciseProgressDTO {
   exerciseId: string;
   exerciseQuestion: string;
   categoryId?: string | null;
+  completedAt: string;
 };

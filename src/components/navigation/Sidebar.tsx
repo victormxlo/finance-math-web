@@ -13,7 +13,7 @@ export function Sidebar() {
   const menuItems = [...baseMenuItems];
 
   if (user?.type === "Admin") {
-    menuItems.splice(6, 0, { to: "/admin/reports", label: "Reports", icon: BarChart });
+    menuItems.splice(6, 0, { to: "/admin/reports", label: "Relatórios", icon: BarChart });
   }
 
   return (

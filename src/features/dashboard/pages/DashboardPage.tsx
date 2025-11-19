@@ -1,10 +1,11 @@
-import { AchievementsHighlight } from "../components/AchievementsHighlight";
-import { ActivityTimeline } from "../components/ActivityTimeline";
-import { ChallengeWidget } from "../components/ChallengeWidget";
-import { LearningPath } from "../components/LearningPath";
-import { NextContents } from "../components/NextContents";
-import { QuickStats } from "../components/QuickStats";
-import { WelcomeBanner } from "../components/WelcomeBanner";
+import { AchievementsHighlight } from "@/features/dashboard/components/AchievementsHighlight";
+import { ActivityTimeline } from "@/features/dashboard/components/ActivityTimeline";
+import { ChallengeWidget } from "@/features/dashboard/components/ChallengeWidget";
+import { LearningPath } from "@/features/dashboard/components/LearningPath";
+import { NextContents } from "@/features/dashboard/components/NextContents";
+import { QuickStats } from "@/features/dashboard/components/QuickStats";
+import { WelcomeBanner } from "@/features/dashboard/components/WelcomeBanner";
+
 export function DashboardPage() {
   return (
     <div className="space-y-10">

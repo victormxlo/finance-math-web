@@ -24,7 +24,7 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({ sections, acti
               >
                 <div>
                   <div className={`text-sm font-medium ${isActive ? "text-primary" : ""}`}>{s.title}</div>
-                  <div className="text-xs text-gray-500">Section {s.order + 1}</div>
+                  <div className="text-xs text-gray-500">Seção {s.order + 1}</div>
                 </div>
 
                 <div className="ml-2">

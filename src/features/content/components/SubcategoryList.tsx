@@ -27,7 +27,7 @@ export const SubcategoryList = ({ categories, onSelect, onBack }: SubcategoryLis
           >
             <h3 className="text-lg font-semibold mb-1">{subcategory.name}</h3>
             <p className="text-sm text-gray-500">
-              {subcategory.contentIds.length} {subcategory.contentIds.length > 1 ? "conteúdos" : "conteúdo"}
+              {subcategory.contentIds.length} {subcategory.contentIds.length === 1 ? "conteúdo" : "conteúdos"}
             </p>
           </button>
         ))}

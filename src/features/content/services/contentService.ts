@@ -1,47 +1,27 @@
+import { contentApi } from "../api/contentApi";
 import type { CompleteContentResponseDTO } from "../dtos/completeContentResponseDto";
 import type { ContentDTO } from "../dtos/contentDto";
 import type { ContentSectionDTO } from "../dtos/contentSectionDto";
 import type { UserContentProgressDTO } from "../dtos/userContentProgressDto";
-import { mockContent, mockSections, mockProgress, mockCompleteResponse } from "../mocks/mockContents";
-
-const wait = (ms = 250) => new Promise((r) => setTimeout(r, ms));
 
 export const contentService = {
-  async getById(contentId: string): Promise<ContentDTO> {
-    await wait(250);
-    if (contentId === mockContent.id) return { ...mockContent };
-
-    throw new Error("Content not found (mock)");
+  getAll(): Promise<ContentDTO[]> {
+    return contentApi.getAll();
   },
 
-  async getSections(contentId: string): Promise<ContentSectionDTO[]> {
-    await wait(200);
-    if (contentId === mockContent.id) {
-      return [...mockSections].sort((a, b) => a.order - b.order);
-    }
-    return [];
+  getById(contentId: string): Promise<ContentDTO> {
+    return contentApi.getContentById(contentId);
   },
 
-  async getUserProgress(userId: string): Promise<UserContentProgressDTO[]> {
-    await wait(120);
-    if (!userId) return [];
-    return userId === "88b8afb9-2080-48f8-a6be-622067876fc5" ? [...mockProgress] : [];
+  getSections(contentId: string): Promise<ContentSectionDTO[]> {
+    return contentApi.getSections(contentId);
   },
 
-  async completeContent(contentId: string): Promise<CompleteContentResponseDTO> {
-    await wait(300);
-    if (contentId === mockContent.id) {
-      return { ...mockCompleteResponse };
-    }
-    return {
-      contentId,
-      moduleCompleted: false,
-      reward: {},
-      profile: {},
-      achievementsUnlocked: [],
-      completedAtUtc: new Date().toISOString(),
-      challengesProgress: [],
-      nextRecommended: [],
-    };
+  getUserProgress(userId: string): Promise<UserContentProgressDTO[]> {
+    return contentApi.getUserProgress(userId);
+  },
+
+  completeContent(contentId: string): Promise<CompleteContentResponseDTO> {
+    return contentApi.completeContent(contentId);
   },
 };

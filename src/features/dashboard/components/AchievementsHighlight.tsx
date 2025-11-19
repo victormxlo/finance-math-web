@@ -1,27 +1,33 @@
-import type { AchievementDTO } from "@/features/achievement/dtos/achievementDto";
 import type { FC } from "react";
-import { mockAchievements } from "../mocks/mockAchievements";
 import { AchievementCard } from "./AchievementCard";
+import { useAchievementsHighlight } from "../hooks/useAchievementsHighlight";
+import { useAuth } from "@/features/auth/hooks/useAuth";
+import { Link } from "react-router-dom";
 
 interface AchievementsHighlightProps {
-  achievements?: AchievementDTO[];
   loading?: boolean;
   limit?: number;
 };
 
 export const AchievementsHighlight: FC<AchievementsHighlightProps> = 
-  ({ achievements, loading = false, limit = 3 }) => {
-  const list = achievements ?? mockAchievements;
+  ({ loading = false, limit = 3 }) => {
+  const { user } = useAuth();
+  const { achievements } = useAchievementsHighlight(user?.id);
 
   if (loading) {
     return (
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {Array.from({ length: limit }).map((_, idx) => (
-          <div key={idx} className="animate-pulse bg-neutral-100 rounded-lg h-28"></div>
-        ))}
-      </div>
+      <section aria-labelledby="achievements-title">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {Array.from({ length: limit }).map((_, idx) => (
+            <div
+              key={idx}
+              className="animate-pulse bg-neutral-100 rounded-lg h-28"
+            />
+          ))}
+        </div>
+      </section>
     );
-  };
+  }
 
   return (
     <section aria-labelledby="achievements-title">
@@ -29,18 +35,24 @@ export const AchievementsHighlight: FC<AchievementsHighlightProps> =
         <h2 id="achievements-title" className="text-lg font-semibold">
           Conquistas
         </h2>
-        <a href="/achievements" className="text-sm text-muted-foreground hover:underline">
+        <Link to="/achievements" className="text-sm text-muted-foreground hover:underline">
           Ver todos
-        </a>
+        </Link>
       </div>
 
-      <div className="overflow-x-auto">
-        <div className="inline-flex gap-4 py-2">
-          {list.slice(0, limit).map((a: AchievementDTO) => (
-            <AchievementCard key={a.id} achievement={a} />
-          ))}
+      {achievements.length === 0 ? (
+        <p className="text-sm text-muted-foreground">
+          Nenhuma conquista pendente.
+        </p>
+      ) : (
+        <div className="overflow-x-auto">
+          <div className="inline-flex gap-4 py-2">
+            {achievements.slice(0, limit).map((a) => (
+              <AchievementCard key={a.id} achievement={a} />
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </section>
   );
 };

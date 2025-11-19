@@ -80,7 +80,7 @@ function getPageTitle(path: string) {
     "/challenges": "Desafios",
     "/achievements": "Conquistas",
     "/profile": "Perfil",
-    "/admin/reports": "Reports",
+    "/admin/reports": "Relatórios",
   };
 
   const exact = map[path];

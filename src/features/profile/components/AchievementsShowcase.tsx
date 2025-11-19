@@ -28,7 +28,7 @@ export function AchievementsShowcase({
   if (!achievements || achievements.length === 0) {
     return (
       <p className="text-sm text-muted-foreground mt-6">
-        No achievements unlocked yet.
+        Não há conquistas desbloqueadas até o momento.
       </p>
     );
   }

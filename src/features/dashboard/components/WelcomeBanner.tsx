@@ -15,7 +15,7 @@ export function WelcomeBanner() {
         Bem-vindo{user?.fullName ? `, ${user.fullName}` : ""}!
       </h1>
       <p className="mt-2 text-primary-foreground/90 text-sm">
-        Prepare-se para conquistar seus objetivos financeiros de forma divertida e interativa
+        Prepare-se para conquistar seus objetivos financeiros de forma divertida e interativa.
       </p>
     </motion.div>
   );

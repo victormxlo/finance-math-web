@@ -49,11 +49,10 @@ export const ContentDetailPage = () => {
   };
 
   if (error || !content) {
-    // TBI: Create a better UX for this feature
     return (
       <div className="p-6">
-        <div className="text-red-600">Failed to load content. {error}</div>
-        <button className="mt-4" onClick={() => window.location.reload()}>Retry</button>
+        <div className="text-red-600">Falha ao carregar o conteúdo. {error}</div>
+        <button className="mt-4" onClick={() => window.location.reload()}>Tentar novamente</button>
       </div>
     );
   };

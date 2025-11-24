@@ -1,4 +1,3 @@
-import { useToast } from "@/app/hooks/useToast";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { CardContent } from "@/components/ui/CardContent";
@@ -17,7 +16,6 @@ export function UserSettingsSection({
   userId,
   currentUsername,
 }: UserSettingsSectionProps) {
-  const { toast } = useToast();
 
   const [username, setUsername] = useState(currentUsername);
   const { changeUsername, changePassword, isChangingUsername, isChangingPassword } = useUserSettings(userId, currentUsername);

@@ -1,4 +1,5 @@
 import { useLoading } from "@/app/hooks/useLoading";
+import { useToast } from "@/app/hooks/useToast";
 import { categoryService } from "@/features/content/services/categoryService";
 import { contentService } from "@/features/content/services/contentService";
 import { useCallback, useEffect, useState } from "react";
@@ -15,6 +16,8 @@ export function useLearningPath(userId?: string) {
 
   const [data, setData] = useState<LearningPathItemData[]>([]);
   const [error, setError] = useState<string | null>(null);
+
+  const { toast } = useToast();
 
   const load = useCallback(
     async (signal?: AbortSignal) => {
@@ -92,6 +95,7 @@ export function useLearningPath(userId?: string) {
       } catch (err: any) {
         if (!signal?.aborted) {
           setError(err?.message ?? "Falha ao carregar caminho de aprendizagem");
+          toast({ description: err?.message, variant: "destructive" });
         }
       } finally {
         if (!signal?.aborted) hideLoading();

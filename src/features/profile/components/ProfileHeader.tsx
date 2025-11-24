@@ -1,3 +1,4 @@
+import { useToast } from "@/app/hooks/useToast";
 import { AvatarInitials } from "@/components/ui/AvatarInitials";
 import { Button } from "@/components/ui/Button";
 import Progress from "@/components/ui/Progress";
@@ -28,6 +29,8 @@ export const ProfileHeader: FC<ProfileHeaderProps> = ({
   const [local, setLocal] = useState(username ?? "");
   const [error, setError] = useState<string | null>(null);
 
+  const { toast } = useToast();
+
   const xpForNext = Math.max(1, nextLevelXp);
   const xpPercent = Math.round((Math.min(experiencePoints, xpForNext) / xpForNext) * 100);
 
@@ -43,6 +46,7 @@ export const ProfileHeader: FC<ProfileHeaderProps> = ({
       setEditing(false);
     } catch (err: any) {
       setError(err?.message ?? "Erro ao salvar");
+      toast({ description: err?.message ?? "Erro ao salvar", variant: "destructive" });
     }
   };
 
@@ -109,7 +113,7 @@ export const ProfileHeader: FC<ProfileHeaderProps> = ({
         <div className="flex-1 w-full">
           <div className="mb-2 flex items-center justify-between gap-4">
             <div className="text-sm text-gray-600">Experiência</div>
-            <div className="text-sm text-gray-600">{experiencePoints} XP</div>
+            <div className="text-sm text-gray-600">{experiencePoints} Capital</div>
           </div>
 
           <Progress value={experiencePoints} max={xpForNext} showLabel />

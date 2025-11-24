@@ -43,8 +43,8 @@ export const Navbar: React.FC = () => {
         <div className="flex items-center gap-4 min-w-[220px] justify-end">
           <div className="hidden sm:flex items-center gap-4 text-xs text-muted-foreground">
             <StatusItem icon={<Award size={16} />} label={levelName ?? "Lv. —"} />
-            <StatusItem icon={<Star size={16} />} label={`${xp} XP`} />
-            <StatusItem icon={<Coins size={16} />} label={`${virtualCurrency}`} />
+            <StatusItem icon={<Star size={16} />} label={`${xp} Capital`} />
+            <StatusItem icon={<Coins size={16} />} label={`${virtualCurrency} Dividendos`} />
           </div>
 
           <button

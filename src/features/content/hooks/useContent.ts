@@ -2,11 +2,14 @@ import { useState, useCallback, useEffect } from "react";
 import { contentService } from "@/features/content/services/contentService";
 import type { ContentDTO } from "@/features/content/dtos/contentDto";
 import { useLoading } from "@/app/hooks/useLoading";
+import { useToast } from "@/app/hooks/useToast";
 
 export function useContent(contentId?: string) {
   const { showLoading, hideLoading } = useLoading();
   const [data, setData] = useState<ContentDTO | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  const { toast } = useToast();
 
   const load = useCallback(
     async (signal?: AbortSignal) => {
@@ -26,6 +29,7 @@ export function useContent(contentId?: string) {
       } catch (err: any) {
         if (signal?.aborted) return;
         setError(err?.message ?? "Falha ao carregar conteúdo");
+        toast({ description: err?.message, variant: "destructive" });
       } finally {
         hideLoading();
       }

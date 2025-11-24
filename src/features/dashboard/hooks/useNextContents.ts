@@ -1,4 +1,5 @@
 import { useLoading } from "@/app/hooks/useLoading";
+import { useToast } from "@/app/hooks/useToast";
 import type { ContentDTO } from "@/features/content/dtos/contentDto";
 import { contentService } from "@/features/content/services/contentService";
 import { useCallback, useEffect, useState } from "react";
@@ -9,6 +10,8 @@ export function useNextContents(userId?: string) {
   const [contents, setContents] = useState<ContentDTO[]>([]);
   const [error, setError] = useState<string | null>(null);
 
+  const { toast } = useToast();
+  
   const load = useCallback(
     async (signal?: AbortSignal) => {
       if (!userId) {
@@ -40,6 +43,7 @@ export function useNextContents(userId?: string) {
       } catch (err: any) {
         if (!signal?.aborted) {
           setError(err?.message ?? "Falha ao carregar próximos conteúdos");
+          toast({ description: err?.message, variant: "destructive" });
         }
       } finally {
         if (!signal?.aborted) hideLoading();

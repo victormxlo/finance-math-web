@@ -1,11 +1,14 @@
 import { useState, useCallback, useEffect, useMemo } from "react";
 import { contentService } from "../services/contentService";
 import type { UserContentProgressDTO } from "../dtos/userContentProgressDto";
+import { useToast } from "@/app/hooks/useToast";
 
 export function useContentProgress(userId?: string, contentId?: string) {
   const [data, setData] = useState<UserContentProgressDTO[] | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const { toast } = useToast();
 
   const load = useCallback(
     async (signal?: AbortSignal) => {
@@ -25,6 +28,7 @@ export function useContentProgress(userId?: string, contentId?: string) {
       } catch (err: any) {
         if (signal?.aborted) return;
         setError(err?.message ?? "Falha ao carregar progresso de conteúdos do usuário");
+        toast({ description: err?.message, variant: "destructive" });
       } finally {
         if (!signal?.aborted) setLoading(false);
       }

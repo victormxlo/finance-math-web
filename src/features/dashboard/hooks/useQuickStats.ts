@@ -1,4 +1,5 @@
 import { useLoading } from "@/app/hooks/useLoading";
+import { useToast } from "@/app/hooks/useToast";
 import { achievementService } from "@/features/achievement/services/achievementService";
 import { challengeService } from "@/features/challenge/services/challengeService";
 import { contentService } from "@/features/content/services/contentService";
@@ -19,6 +20,8 @@ export function useQuickStats(userId: string | undefined) {
 
   const [data, setData] = useState<QuickStatsData | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  const { toast } = useToast();
 
   const load = useCallback(
     async (signal?: AbortSignal) => {
@@ -51,7 +54,7 @@ export function useQuickStats(userId: string | undefined) {
           const aggregated: QuickStatsData = {
             completedContents: contentProgress.filter(p => p.completedAt !== "").length,
             resolvedExercises: exerciseProgress.filter(p => p.completedAt !== "").length,
-            completedChallenges: challengeProgress.filter(p => p.completedAt !== "").length,
+            completedChallenges: challengeProgress.filter(p => p.isCompleted).length,
             achievements: userAchievements.length,
             currentStreak: profile?.currentStreakDays
               ? `${profile?.currentStreakDays} dias`
@@ -62,6 +65,7 @@ export function useQuickStats(userId: string | undefined) {
       } catch (err: any) {
         if (signal?.aborted) return;
         setError(err?.message ?? "Falha ao carregar estatísticas");
+        toast({ description: err?.message, variant: "destructive" });
       } finally {
         if (!signal?.aborted) hideLoading();
       }

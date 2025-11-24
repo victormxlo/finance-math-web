@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { contentService } from "@/features/content/services/contentService";
 import type { ContentDTO } from "@/features/content/dtos/contentDto";
 import { useLoading } from "@/app/hooks/useLoading";
+import { useToast } from "@/app/hooks/useToast";
 
 export function useContents(
   selectedCategory?: string | null,
@@ -12,6 +13,8 @@ export function useContents(
   const [error, setError] = useState<string | null>(null);
   const { showLoading, hideLoading } = useLoading();
 
+  const { toast } = useToast();
+  
   const load = useCallback(async () => {
     setLoading(true);
     showLoading();
@@ -29,6 +32,7 @@ export function useContents(
       setContents(filtered);
     } catch (err: any) {
       setError(err?.message ?? "Falha ao carregar conteudos");
+      toast({ description: err?.message, variant: "destructive" });
     } finally {
       setLoading(false);
       hideLoading();

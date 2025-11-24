@@ -38,7 +38,7 @@ export function ChallengeItem({ challengeProgress }: ChallengeItemProps) {
       <div className="mt-2 text-xs text-muted-foreground">
         {challengeProgress.isCompleted
           ? `Completed on ${new Date(challengeProgress.completedAt || "").toLocaleDateString()}`
-          : `${challengeProgress.currentProgress} / ${challengeProgress.targetProgress} goals`}
+          : `${challengeProgress.currentProgress} / ${challengeProgress.targetProgress}`}
       </div>
     </div>
   );

@@ -20,9 +20,10 @@ export const exerciseService = {
 
   validateAnswer(
     exerciseId: string,
-    optionId: string
+    optionId: string,
+    userId?: string
   ): Promise<ValidateExerciseAnswerDTO> {
-    return exerciseApi.validateAnswer(exerciseId, optionId);
+    return exerciseApi.validateAnswer(exerciseId, optionId, userId);
   },
 
   completeExercise(

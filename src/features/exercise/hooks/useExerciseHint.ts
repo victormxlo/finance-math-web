@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import type { ExerciseHintDTO } from "../dtos/exerciseHintDto";
 import { exerciseService } from "../services/exerciseService";
 import { useLoading } from "@/app/hooks/useLoading";
+import { useToast } from "@/app/hooks/useToast";
 
 export function useExerciseHints(exerciseId?: string) {
   const [hints, setHints] = useState<ExerciseHintDTO[] | null>(null);
@@ -9,6 +10,8 @@ export function useExerciseHints(exerciseId?: string) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const { showLoading, hideLoading } = useLoading();
+
+  const { toast } = useToast();
 
   const load = useCallback(async () => {
     if (!exerciseId) {
@@ -26,6 +29,7 @@ export function useExerciseHints(exerciseId?: string) {
       setVisibleCount(0);
     } catch (err: any) {
       setError(err?.message ?? "Falha ao carregar dicas");
+      toast({ description: err?.message, variant: "destructive" });
     } finally {
       setLoading(false);
       hideLoading();

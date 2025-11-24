@@ -3,7 +3,7 @@ import type { ContentDTO } from "@/features/content/dtos/contentDto";
 
 interface ContentListProps {
   contents: ContentDTO[];
-  completedIds?: Set<string>;
+  completedIds?: string[];
   onBack?: () => void;
 }
 
@@ -23,7 +23,7 @@ export const ContentList: React.FC<ContentListProps> = ({ contents, completedIds
         <ContentCard
           key={content.id}
           content={content}
-          completed={completedIds?.has(content.id)}
+          completed={completedIds?.includes(content.id)}
         />
       ))}
     </div>

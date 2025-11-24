@@ -17,12 +17,12 @@ export function useUserSettings(userId: string, currentUsername: string) {
       const success = await gamificationService.changeUsername(userId, newUsername);
       toast({
         description: success
-          ? "Username updated successfully."
-          : "Could not update username.",
+          ? "Nome de usuário alterado com sucesso."
+          : "Não é possível alterar o nome de usuário.",
         variant: success ? "default" : "destructive",
       });
-    } catch {
-      toast({ description: "An error occurred while updating username.", variant: "destructive" });
+    } catch (err: any) {
+      toast({ description: err?.message ?? "Ocorreu um erro no processo de alteração do nome de usuário", variant: "destructive" });
     } finally {
       setIsChangingUsername(false);
       hideLoading();
@@ -36,12 +36,12 @@ export function useUserSettings(userId: string, currentUsername: string) {
       const success = await gamificationService.changePassword(userId, current, next);
       toast({
         description: success
-          ? "Password changed successfully."
-          : "Invalid credentials or request failed.",
+          ? "Senha alterada com sucesso."
+          : "Credenciais inválidas ou falha na requisição.",
         variant: success ? "default" : "destructive",
       });
     } catch {
-      toast({ description: "An error occurred while changing password.", variant: "destructive" });
+      toast({ description: "Ocorreu um erro no processo de alteração da senha.", variant: "destructive" });
     } finally {
       setIsChangingPassword(false);
       hideLoading();

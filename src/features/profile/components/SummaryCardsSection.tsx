@@ -16,21 +16,21 @@ export function SummaryCardsSection({
 }: SummaryCardsSectionProps) {
   const cards = [
     {
-      label: "Level & XP",
+      label: "Nível & Capital",
       value: `${levelName}`,
-      subValue: `${experiencePoints} XP`,
+      subValue: `${experiencePoints} Capital`,
       icon: TrendingUp,
     },
     {
-      label: "Virtual Currency",
+      label: "Moeda Virtual",
       value: `${virtualCurrency}`,
-      subValue: "Coins",
+      subValue: "Dividendos",
       icon: Coins,
     },
     {
       label: "Current Streak",
-      value: `${currentStreakDays} days`,
-      subValue: "Daily Activity",
+      value: `${currentStreakDays} dia${currentStreakDays === 1 ? "" : "s"}`,
+      subValue: "Atividade Diária",
       icon: Flame,
     },
   ];

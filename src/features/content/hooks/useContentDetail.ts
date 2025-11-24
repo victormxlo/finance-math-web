@@ -99,7 +99,7 @@ export function useContentDetail(contentId?: string, userId?: string) {
     if (isContentCompleted) return null;
 
     try {
-      const res = await complete(contentId);
+      const res = await complete(contentId, userId!);
       if (res) {
         const allIds = orderedSections.map((s) => s.id);
         const payload: LocalContentProgress = { completedSectionIds: allIds, updatedAt: new Date().toISOString() };

@@ -22,10 +22,11 @@ export const exerciseApi = {
 
   validateAnswer(
     exerciseId: string,
-    optionId: string
+    optionId: string,
+    userId?: string
   ): Promise<ValidateExerciseAnswerDTO> {
     return api
-      .post(`/exercises/${exerciseId}/validate`, { optionId })
+      .post(`/exercises/${exerciseId}/validate-answer`, { exerciseOptionId: optionId, userId })
       .then(res => res.data);
   },
 
@@ -37,9 +38,9 @@ export const exerciseApi = {
   ): Promise<CompleteExerciseResponseDTO> {
     return api
       .post(`/exercises/${exerciseId}/complete`, {
-        optionId,
+        exerciseOptionId: optionId,
         usedHint,
-        userId,
+        userId
       })
       .then(res => res.data);
   },

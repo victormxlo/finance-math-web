@@ -1,13 +1,16 @@
 import { useLoading } from "@/app/hooks/useLoading";
+import { useToast } from "@/app/hooks/useToast";
 import type { UserChallengeProgressDTO } from "@/features/challenge/dtos/userChallengeProgressDto";
 import { challengeService } from "@/features/challenge/services/challengeService";
 import { useCallback, useEffect, useState } from "react";
 
-export function useChallengeWidget(userId?: string, limit: number = 3) {
+export function useChallengeWidget(userId?: string, limit: number = 8) {
   const { showLoading, hideLoading } = useLoading();
 
   const [challenges, setChallenges] = useState<UserChallengeProgressDTO[]>([]);
   const [error, setError] = useState<string | null>(null);
+
+  const { toast } = useToast();
 
   const load = useCallback(async () => {
     try {
@@ -27,6 +30,7 @@ export function useChallengeWidget(userId?: string, limit: number = 3) {
       setChallenges(active.slice(0, limit));
     } catch (err: any) {
       setError(err?.message ?? "Falha ao carregar widget de desafios");
+      toast({ description: err?.message, variant: "destructive" });
       setChallenges([]);
     } finally {
       hideLoading();

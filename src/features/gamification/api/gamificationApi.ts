@@ -9,12 +9,12 @@ export const gamificationApi = {
   },
 
   changeUsername(userId: string, newUsername: string): Promise<boolean> {
-    return api.post(`/users/${userId}/change-username`, { newUsername: newUsername })
+    return api.patch(`/users/${userId}/change-username`, { newUsername: newUsername })
       .then(res => res.data);
   },
 
   changePassword(userId: string, current: string, next: string): Promise<boolean> {
-    return api.post(`/users/${userId}/change-password`, { currentPassword: current, newPassword: next })
+    return api.patch(`/users/${userId}/change-password`, { currentPassword: current, newPassword: next })
       .then(res => res.data);
   },
 

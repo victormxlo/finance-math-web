@@ -3,8 +3,12 @@ import { CategoryList } from "../components/CategoryList";
 import { SubcategoryList } from "../components/SubcategoryList";
 import { ContentList } from "../components/ContentList";
 import { useCategories } from "../hooks/useCategories";
+import { useContentProgress } from "../hooks/useContentProgress";
+import { useAuth } from "@/features/auth/hooks/useAuth";
 
 export function ContentPage() {
+  const { user } = useAuth();
+
   const {
     categories,
     subcategories,
@@ -15,30 +19,57 @@ export function ContentPage() {
   } = useCategories();
 
   const { contents } = useContents(selectedCategory, selectedSubcategory);
+  const { data: completedContents } = useContentProgress(user?.id);
+
+  const completedContentsIds = completedContents.map(c => c.contentId);
+
+  const handleBackToCategories = () => {
+    setSelectedCategory(null);
+    setSelectedSubcategory(null);
+  };
+
+  const handleBackToSubcategories = () => {
+    setSelectedSubcategory(null);
+  };
+
+  const hasSubcategories =
+    selectedCategory && subcategories && subcategories.length > 0;
 
   return (
     <div className="p-6 space-y-8">
       <header>
         <h1 className="text-2xl font-semibold mb-4">Conteúdos</h1>
       </header>
+
       {!selectedCategory && (
-        <CategoryList categories={categories} onSelect={setSelectedCategory} />
+        <CategoryList
+          categories={categories}
+          onSelect={setSelectedCategory}
+        />
       )}
 
-      {selectedCategory && !selectedSubcategory && (
+      {selectedCategory && hasSubcategories && !selectedSubcategory && (
         <SubcategoryList
           categories={subcategories}
-          onBack={() => setSelectedCategory(null)}
+          onBack={handleBackToCategories}
           onSelect={setSelectedSubcategory}
+        />
+      )}
+
+      {selectedCategory && !hasSubcategories && (
+        <ContentList
+          contents={contents}
+          onBack={handleBackToCategories}
         />
       )}
 
       {selectedSubcategory && (
         <ContentList
           contents={contents}
-          onBack={() => setSelectedSubcategory(null)}
+          completedIds={completedContentsIds}
+          onBack={handleBackToSubcategories}
         />
       )}
     </div>
   );
-};
+}

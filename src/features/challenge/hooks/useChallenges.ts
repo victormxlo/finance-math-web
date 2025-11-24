@@ -2,11 +2,14 @@ import { useCallback, useEffect, useState } from "react";
 import type { ChallengeDTO } from "../dtos/challengeDto";
 import { challengeService } from "../services/challengeService";
 import { useLoading } from "@/app/hooks/useLoading";
+import { useToast } from "@/app/hooks/useToast";
 
 export function useChallenges(active?: boolean | null) {
   const [data, setData] = useState<ChallengeDTO[] | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+
+  const { toast } = useToast();
 
   const { showLoading, hideLoading } = useLoading();
 
@@ -20,6 +23,7 @@ export function useChallenges(active?: boolean | null) {
       setData(response);
     } catch (err: any) {
       setError(err?.message ?? "Falha ao carregar desafios");
+      toast({ description: err?.message, variant: "destructive" });
       setData(null);
     } finally {
       setLoading(false);

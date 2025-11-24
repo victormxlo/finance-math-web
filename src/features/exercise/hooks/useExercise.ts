@@ -2,12 +2,15 @@ import { useCallback, useEffect, useState } from "react";
 import type { ExerciseDTO } from "../dtos/exerciseDto";
 import { exerciseService } from "../services/exerciseService";
 import { useLoading } from "@/app/hooks/useLoading";
+import { useToast } from "@/app/hooks/useToast";
 
 export function useExercise(exerciseId?: string) {
   const [data, setData] = useState<ExerciseDTO | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const { showLoading, hideLoading } = useLoading();
+
+  const { toast } = useToast();
 
   const load = useCallback(async () => {
     if (!exerciseId) {
@@ -24,6 +27,7 @@ export function useExercise(exerciseId?: string) {
       setData(ex);
     } catch (err: any) {
       setError(err?.message ?? "Falha ao carregar exercício");
+      toast({ description: err?.message, variant: "destructive" });
     } finally {
       setLoading(false);
       hideLoading();

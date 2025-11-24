@@ -10,7 +10,7 @@ interface TableOfContentsProps {
 export const TableOfContents: React.FC<TableOfContentsProps> = ({ sections, activeIndex, onNavigate, completedIds = new Set() }) => {
   return (
     <nav aria-label="Table of Contents" className="w-72">
-      <div className="text-sm font-semibold mb-3">Contents</div>
+      <div className="text-sm font-semibold mb-3">Conteúdos</div>
 
       <ul className="space-y-2">
         {sections.map((s, idx) => {

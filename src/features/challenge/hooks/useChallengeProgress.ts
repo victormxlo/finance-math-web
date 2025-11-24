@@ -2,11 +2,14 @@ import { useCallback, useEffect, useState } from "react";
 import type { UserChallengeProgressDTO } from "../dtos/userChallengeProgressDto";
 import { challengeService } from "../services/challengeService";
 import { useLoading } from "@/app/hooks/useLoading";
+import { useToast } from "@/app/hooks/useToast";
 
 export function useChallengeProgress(userId?: string) {
   const [data, setData] = useState<UserChallengeProgressDTO[] | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+
+  const { toast } = useToast();
 
   const { showLoading, hideLoading } = useLoading();
 
@@ -25,6 +28,7 @@ export function useChallengeProgress(userId?: string) {
       setData(response);
     } catch (err: any) {
       setError(err?.message ?? "Falha ao carregar progresso de desafios do usuário");
+      toast({ description: err?.message, variant: "destructive" });
       setData(null);
     } finally {
       setLoading(false);
@@ -47,6 +51,7 @@ export function useChallengeProgress(userId?: string) {
       } catch (err: any) {
         if (!mounted) return;
         setError(err?.message ?? "Falha ao carregar progresso de desafios do usuário");
+        toast({ description: err?.message, variant: "destructive" });
         setData(null);
       } finally {
         if (!mounted) return;

@@ -51,7 +51,7 @@ export function useExerciseDetail(exerciseId?: string, userId?: string) {
     setIsAnswerCorrect(null);
 
     try {
-      const res = await validate(exerciseId, selectedOptionId);
+      const res = await validate(exerciseId, selectedOptionId, userId!);
       setIsAnswerValidated(true);
       setIsAnswerCorrect(res.isCorrect);
       return res;

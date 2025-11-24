@@ -16,13 +16,13 @@ export const FooterActions: React.FC<FooterActionsProps> = ({ onPrev, onNext, on
     <div className="mt-8 flex items-center justify-between gap-4">
       <div>
         <Button variant="outline" size="sm" onClick={onPrev} disabled={disablePrev}>
-          ← Previous
+          ← Anterior
         </Button>
       </div>
 
       <div className="flex items-center gap-3">
-        <Button variant="ghost" size="sm" className="cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>Top</Button>
-        <Button variant="default" size="sm" className="cursor-pointer" onClick={onNext} disabled={disableNext}>Next →</Button>
+        <Button variant="ghost" size="sm" className="cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>Topo</Button>
+        <Button variant="default" size="sm" className="cursor-pointer" onClick={onNext} disabled={disableNext}>Próximo →</Button>
 
         <Button
           variant={isContentCompleted ? "secondary" : "default"}

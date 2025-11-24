@@ -79,9 +79,9 @@ export const ChallengeCard: FC<ChallengeCardProps> = ({ challenge, progress, onA
             <div>
               <div className="text-xs text-gray-500">Recompensa</div>
               <div className="mt-1">
-                <span className="font-semibold">{challenge.experienceReward} XP</span>
+                <span className="font-semibold">{challenge.experienceReward} capital</span>
                 <span className="mx-2 text-gray-400">•</span>
-                <span className="font-semibold">{challenge.virtualCurrencyReward} coins</span>
+                <span className="font-semibold">{challenge.virtualCurrencyReward} dividendos</span>
               </div>
             </div>
           </div>

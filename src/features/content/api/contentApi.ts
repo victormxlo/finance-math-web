@@ -21,7 +21,7 @@ export const contentApi = {
     return api.get(`/contents/${userId}/progress`).then(res => res.data);
   },
 
-  async completeContent(contentId: string): Promise<CompleteContentResponseDTO> {
-    return api.post(`/contents/${contentId}/complete`).then(res => res.data);
+  async completeContent(contentId: string, userId: string): Promise<CompleteContentResponseDTO> {
+    return api.post(`/contents/${contentId}/complete`, { userId: userId }).then(res => res.data);
   }
 };

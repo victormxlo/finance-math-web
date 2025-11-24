@@ -3,6 +3,7 @@ import type { GamificationProfileDTO } from "../dtos/gamificationProfileDto";
 import { useAuth } from "@/features/auth/hooks/useAuth";
 import { gamificationService } from "../services/gamificationService";
 import { useLoading } from "@/app/hooks/useLoading";
+import { useToast } from "@/app/hooks/useToast";
 
 export function useGamificationProfile(userId: string) {
   const { user } = useAuth();
@@ -12,6 +13,8 @@ export function useGamificationProfile(userId: string) {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState<boolean>(false);
+
+  const { toast } = useToast();
 
   const { showLoading, hideLoading } = useLoading();
 
@@ -30,6 +33,7 @@ export function useGamificationProfile(userId: string) {
       setData(response);
     } catch (err: any) {
       setError(err?.message ?? "Falha ao carregar perfil");
+      toast({ description: err?.message, variant: "destructive" });
       setData(null);
     } finally {
       setLoading(false);
@@ -51,7 +55,9 @@ export function useGamificationProfile(userId: string) {
       setData(updatedProfile);
       return true;
     } catch (err: any) {
+      toast({ description: err?.message, variant: "destructive" });
       throw err;
+
     } finally {
       setSaving(false);
       setLoading(false);

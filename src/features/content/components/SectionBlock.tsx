@@ -38,7 +38,7 @@ export const SectionBlock: React.FC<SectionBlockProps> = ({ section, isActive = 
             onClick={onMarkComplete}
             disabled={isContentCompleted}
           >
-            {completed ? "Mark as not completed" : "Mark completed"}
+            {completed ? "Marcar como não concluído" : "Marcar como concluído"}
           </Button>
         </div>
       </header>
@@ -55,7 +55,7 @@ export const SectionBlock: React.FC<SectionBlockProps> = ({ section, isActive = 
             className="cursor-pointer"
             onClick={onNavigateNext}
           >
-            Next section
+            Próxima seção
           </Button>
         )}
       </div>

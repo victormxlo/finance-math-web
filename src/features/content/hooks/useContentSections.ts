@@ -2,11 +2,14 @@ import { useState, useCallback, useEffect } from "react";
 import { contentService } from "../services/contentService";
 import type { ContentSectionDTO } from "../dtos/contentSectionDto";
 import { useLoading } from "@/app/hooks/useLoading";
+import { useToast } from "@/app/hooks/useToast";
 
 export function useContentSections(contentId?: string, initialLoad = true) {
   const [data, setData] = useState<ContentSectionDTO[] | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+
+  const { toast } = useToast();
 
   const { showLoading, hideLoading } = useLoading();
 
@@ -29,6 +32,7 @@ export function useContentSections(contentId?: string, initialLoad = true) {
       } catch (err: any) {
         if (signal?.aborted) return;
         setError(err?.message ?? "Falha ao carregar seções");
+        toast({ description: err?.message, variant: "destructive" });
       } finally {
         if (!signal?.aborted) {
           setLoading(false); 

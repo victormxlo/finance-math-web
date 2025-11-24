@@ -21,7 +21,7 @@ export const contentService = {
     return contentApi.getUserProgress(userId);
   },
 
-  completeContent(contentId: string): Promise<CompleteContentResponseDTO> {
-    return contentApi.completeContent(contentId);
+  completeContent(contentId: string, userId: string): Promise<CompleteContentResponseDTO> {
+    return contentApi.completeContent(contentId, userId);
   },
 };

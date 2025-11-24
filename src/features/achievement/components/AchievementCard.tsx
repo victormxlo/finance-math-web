@@ -46,8 +46,8 @@ export const AchievementCard: FC<AchievementCardProps> = ({
       <p className="text-xs text-muted-foreground mt-1">{description}</p>
 
       <div className="mt-3 flex gap-3 text-xs text-muted-foreground">
-        <span>+{experienceReward} XP</span>
-        <span>+{virtualCurrencyReward} coins</span>
+        <span>+{experienceReward} capital</span>
+        <span>+{virtualCurrencyReward} dividendos</span>
       </div>
     </div>
   );

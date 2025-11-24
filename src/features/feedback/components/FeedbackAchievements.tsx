@@ -19,7 +19,7 @@ export const FeedbackAchievements: React.FC<FeedbackAchievementsProps> = ({ achi
             <p className="font-semibold text-green-700">{a.name}</p>
             {a?.description && <p className="text-sm text-gray-600">{a.description}</p>}
             <p className="text-xs text-gray-500 mt-1">
-              +{a.experienceReward} XP • +{a.virtualCurrencyReward} moedas
+              +{a.experienceReward} Capital • +{a.virtualCurrencyReward} Dividendos
             </p>
           </li>
         ))}

@@ -2,11 +2,14 @@ import { useCallback, useEffect, useState } from "react";
 import type { UserAchievementDTO } from "@/features/achievement/dtos/userAchievementDto";
 import { achievementService } from "@/features/achievement/services/achievementService";
 import { useLoading } from "@/app/hooks/useLoading";
+import { useToast } from "@/app/hooks/useToast";
 
 export function useAchievementProgress(userId: string) {
   const [data, setData] = useState<UserAchievementDTO[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+
+  const { toast } = useToast();
 
   const { showLoading, hideLoading } = useLoading();
 
@@ -20,6 +23,7 @@ export function useAchievementProgress(userId: string) {
       setData(response);
     } catch (err: any) {
       setError(err?.message ?? "Falha ao carregar progresso de conquistas do usuário");
+      toast({ description: err?.message, variant: "destructive" });
       setData([]);
     } finally {
       setLoading(false);

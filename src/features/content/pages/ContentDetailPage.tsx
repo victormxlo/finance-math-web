@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { ContentHeader } from "../components/ContentHeader";
 import { useAuth } from "@/features/auth/hooks/useAuth";
 import { useContentDetail } from "@/features/content/hooks/useContentDetail";
@@ -135,11 +135,11 @@ export const ContentDetailPage = () => {
 
         <aside className="hidden lg:block sticky top-20 self-start">
           <div className="border rounded-lg p-4 shadow-sm">
-            <div className="text-sm text-gray-600">Sections</div>
+            <div className="text-sm text-gray-600">Seções</div>
             <div className="mt-2 text-lg font-medium">{sections.length}</div>
 
             <div className="mt-4">
-              <div className="text-sm text-gray-600">Progress</div>
+              <div className="text-sm text-gray-600">Progresso</div>
               <div className="mt-1">
                 <div className="w-full bg-gray-200 rounded h-2">
                   <div
@@ -150,16 +150,16 @@ export const ContentDetailPage = () => {
                   />
                 </div>
                 <div className="text-xs mt-2 text-gray-600">
-                  {Array.from(completedSectionIdsSet).length} of {sections.length} sections
+                  {Array.from(completedSectionIdsSet).length} de {sections.length} seções
                 </div>
               </div>
             </div>
 
             <div className="mt-6 text-sm text-gray-600">
-              <div className="font-medium mb-2">Quick actions</div>
+              <div className="font-medium mb-2">Ações rápidas</div>
               <div className="flex flex-col gap-2">
-                <button className="px-3 py-2 border rounded cursor-pointer" onClick={() => window.print()}>Print</button>
-                <button className="px-3 py-2 border rounded cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>Top</button>
+                <button className="px-3 py-2 border rounded cursor-pointer" onClick={() => window.print()}>Capturar tela</button>
+                <button className="px-3 py-2 border rounded cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>Topo</button>
               </div>
             </div>
           </div>

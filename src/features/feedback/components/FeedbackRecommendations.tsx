@@ -16,7 +16,7 @@ export const FeedbackRecommendations: React.FC<FeedbackRecommendationsProps> = (
             <p className="font-semibold">{item.title}</p>
             <p className="text-sm text-gray-600">{item.category}</p>
             <p className="text-xs text-gray-500 mt-1">
-              Tipo: {item.type} • Dificuldade: {item.difficulty}
+              Tipo: {item.type === "content" ? "Conteúdo" : `Exercício • Dificuldade: ${item.difficulty}`}
             </p>
           </li>
         ))}

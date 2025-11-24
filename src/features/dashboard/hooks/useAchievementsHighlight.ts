@@ -1,4 +1,5 @@
 import { useLoading } from "@/app/hooks/useLoading";
+import { useToast } from "@/app/hooks/useToast";
 import type { AchievementDTO } from "@/features/achievement/dtos/achievementDto";
 import { achievementService } from "@/features/achievement/services/achievementService";
 import { useCallback, useEffect, useState } from "react";
@@ -8,6 +9,8 @@ export function useAchievementsHighlight(userId?: string) {
 
   const [achievements, setAchievements] = useState<AchievementDTO[]>([]);
   const [error, setError] = useState<string | null>(null);
+
+  const { toast } = useToast();
 
   const load = useCallback(
     async (signal?: AbortSignal) => {
@@ -38,6 +41,7 @@ export function useAchievementsHighlight(userId?: string) {
       } catch (err: any) {
         if (!signal?.aborted) {
           setError(err?.message ?? "Falha ao carregar conquistas");
+          toast({ description: err?.message, variant: "destructive" });
         }
       } finally {
         if (!signal?.aborted) hideLoading();
